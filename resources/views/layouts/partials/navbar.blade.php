@@ -38,7 +38,7 @@
                 <a class="nav-link" href="/categories">Categories</a>
             </li>
             <li class="nav-item {{ Request::url() == url('/blog') ? 'active' : '' }}">
-                <a class="nav-link" href="/blog">Blog</a>
+                <a class="nav-link" href="/posts">Blog</a>
             </li>
         </ul>
         <ul class="navbar-nav d-none d-lg-flex">

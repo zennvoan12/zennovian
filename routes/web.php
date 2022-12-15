@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,44 +25,22 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/blog', function () {
+Route::get('/posts', function () {
 
-    $blog_posts = [
-        [
-            'title' => 'Judul Post Pertama',
-            'slug' => 'judul-post-pertama',
-            'author' => 'Muhammad Farhan Novian',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam atque architecto quam a minus autem ipsam eligendi similique, sequi cumque, ratione id beatae quae,',
-            'body' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam atque architecto quam a minus autem ipsam eligendi similique, sequi cumque, ratione id beatae quae, quibusdam cum quos ab eos. Perferendis et sint, quos incidunt, ea aspernatur impedit facere error maxime esse reiciendis nulla ullam nesciunt ipsam itaque perspiciatis tempore est asperiores amet, nemo dolorem praesentium illo quidem. Molestiae, incidunt fugit explicabo cupiditate blanditiis recusandae id porro dolorem distinctio, ex officia omnis cum provident veritatis facilis in debitis suscipit! Aperiam, enim.
-            '
-        ],
-        [
-            'title' => 'Judul Post Kedua',
-            'slug' => 'judul-post-kedua',
-            'author' => 'Muhammad Farhan Novian',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam atque architecto quam a minus autem ipsam eligendi similique, sequi cumque, ratione id beatae quae,',
-            'body' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam atque architecto quam a minus autem ipsam eligendi similique, sequi cumque, ratione id beatae quae, quibusdam cum quos ab eos. Perferendis et sint, quos incidunt, ea aspernatur impedit facere error maxime esse reiciendis nulla ullam nesciunt ipsam itaque perspiciatis tempore est asperiores amet, nemo dolorem praesentium illo quidem. Molestiae, incidunt fugit explicabo cupiditate blanditiis recusandae id porro dolorem distinctio, ex officia omnis cum provident veritatis facilis in debitis suscipit! Aperiam, enim.
-            '
-        ],
-        [
-            'title' => 'Judul Post Pertama',
-            'slug' => 'judul-post-pertama',
-            'author' => 'Muhammad Farhan Novian',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam atque architecto quam a minus autem ipsam eligendi similique, sequi cumque, ratione id beatae quae,',
-            'body' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam atque architecto quam a minus autem ipsam eligendi similique, sequi cumque, ratione id beatae quae, quibusdam cum quos ab eos. Perferendis et sint, quos incidunt, ea aspernatur impedit facere error maxime esse reiciendis nulla ullam nesciunt ipsam itaque perspiciatis tempore est asperiores amet, nemo dolorem praesentium illo quidem. Molestiae, incidunt fugit explicabo cupiditate blanditiis recusandae id porro dolorem distinctio, ex officia omnis cum provident veritatis facilis in debitis suscipit! Aperiam, enim.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, fugit! Assumenda repellat ducimus est, debitis porro blanditiis architecto, quis sit nemo dignissimos dicta sunt. Numquam id quas nulla nam facilis officiis similique ipsum non iusto, libero fugiat rem sapiente voluptate modi consectetur accusantium ipsam omnis voluptates quae magni tempore doloribus?
-            '
-        ],
-    ];
+    $blog_posts = [];
     return view('pages.posts', [
         'title' => 'Blog',
-        'posts' => $blog_posts
+        'posts' => Post::all()
     ]);
 });
 
 
-Route::get('posts/{slug}', function () {
+Route::get('posts/{slug}', function ($slug) {
+
+
     return view('pages.post', [
-        'title' => 'Single Post'
+        'title' => 'Single Post',
+        "post" => Post::find($slug)
     ]);
 });
 

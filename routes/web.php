@@ -28,7 +28,7 @@ Route::get('/about', function () {
 
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index');
-    Route::get('posts/{slug}', 'show');
+    Route::get('posts/{post:slug}', 'show');
 });
 
 

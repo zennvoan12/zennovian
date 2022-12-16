@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class PostController extends Controller
 {
@@ -12,7 +13,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $post)
     {
 
         return view('pages.posts', [
@@ -48,11 +49,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $slug)
+    public function show(Post $post)
     {
         return view('pages.post', [
             'title' => 'Single Post',
-            "post" => Post::find($slug)
+            "post" => $post
         ]);
     }
 

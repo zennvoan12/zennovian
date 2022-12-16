@@ -9,16 +9,16 @@
 
                     @foreach ($posts as $post)
                         <article class="blog-post wow fadeInUp">
-                            <a href="/posts/{{ $post->id }}">
+                            <a href="/posts/{{ $post->slug }}">
                                 <img src="assets/images/Standard_list_blog/Standard_1@2x.jpg" alt="blog post"
                                     class="post-thumbnail">
                             </a>
                             <p class="post-date">January 29, 2020</p>
-                            <a href="/posts/{{ $post->id }}">
+                            <a href="/posts/{{ $post->slug }}">
                                 <h4 class="post-title">{{ $post->title }}</h4>
                             </a>
                             <p class="post-excerpt">{{ $post->excerpt }}</p>
-                            <a href="/posts/{{ $post->id }}" class="post-permalink">READ MORE</a>
+                            <a href="/posts/{{ $post->slug }}" class="post-permalink">READ MORE</a>
                         </article>
                     @endforeach
 

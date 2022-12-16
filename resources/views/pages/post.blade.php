@@ -15,7 +15,8 @@
                             <p class="post-date">January 29, 2020</p>
                         </div>
                         <div class="post-content wow fadeInUp">
-                            <h4></h4>
+                            <h6>By : Farhan in <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
+                                </a></h6>
                             {!! $post->body !!}
 
                         </div>

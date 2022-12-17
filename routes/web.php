@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +39,6 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
 });
+
+
+route::get('/authors/{author:username}', [UserController::class, 'show']);

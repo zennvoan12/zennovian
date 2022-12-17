@@ -109,18 +109,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar-widget wow fadeInUp">
-                        <h5 class="widget-title">Categories</h5>
-                        <div class="widget-content">
-                            <ul class="category-list">
-                                <li><a href="#!">Animation</a></li>
-                                <li><a href="#!">Branding</a></li>
-                                <li><a href="#!">Graphic Design</a></li>
-                                <li><a href="#!">Photography</a></li>
-                                <li><a href="#!">Web Developing</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

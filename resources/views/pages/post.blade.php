@@ -12,13 +12,14 @@
                         <div class="post-header wow fadeInUp">
                             <img src="assets/images/Blog_single/Blog_single@2x.jpg" alt="blog post"
                                 class="post-featured-image">
-                            <p class="post-date">January 29, 2020</p>
                         </div>
                         <div class="post-content wow fadeInUp">
-                            <h6>By : <a href="" class="text-decoration-none">{{ $post->user->name }}</a> In <a
+                            <h6>By : <a href="/authors/{{ $post->author->username }}"
+                                    class="text-decoration-none">{{ $post->author->name }}</a> In <a
                                     class="text-decoration-none"
                                     href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
                                 </a></h6>
+                            <p class="post-date">January 29, 2020</p>
                             {!! $post->body !!}
 
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -18,7 +19,9 @@ class PostController extends Controller
 
         return view('pages.posts', [
             'title' => 'Blog',
-            'posts' => Post::all()
+            'posts' => Post::latest()->get(),
+            'categories' => 'Category'
+
         ]);
     }
 

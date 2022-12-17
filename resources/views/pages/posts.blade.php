@@ -3,28 +3,31 @@
 @section('container')
     <main class="blog-standard">
         <div class="container">
-            <h1 class="oleez-page-title wow fadeInUp">Headlines</h1>
+            <h1 class="oleez-page-title wow fadeInUp">{{ $title }}</h1>
             <div class="row">
                 <div class="col-md-8">
-
-                    @foreach ($posts as $post)
-                        <article class="blog-post wow fadeInUp">
-                            <a href="/posts/{{ $post->slug }}">
-                                <img src="assets/images/Standard_list_blog/Standard_1@2x.jpg" alt="blog post"
-                                    class="post-thumbnail">
-                            </a>
-                            <h6>By : <a href="" class="text-decoration-none">{{ $post->user->name }}</a> in <a
-                                    class="text-decoration-none"
-                                    href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
-                                </a></h6>
-                            <p class="post-date">January 29, 2020</p>
-                            <a href="/posts/{{ $post->slug }}">
-                                <h4 class="post-title">{{ $post->title }}</h4>
-                            </a>
-                            <p class="post-excerpt">{{ $post->excerpt }}</p>
-                            <a href="/posts/{{ $post->slug }}" class="post-permalink">READ MORE</a>
-                        </article>
-                    @endforeach
+                    @if (is_iterable($posts))
+                        @foreach ($posts as $post)
+                            <article class="blog-post wow fadeInUp">
+                                <a href="/posts/{{ $post->slug }}">
+                                    <img src="assets/images/Standard_list_blog/Standard_1@2x.jpg" alt="blog post"
+                                        class="post-thumbnail">
+                                </a>
+                                <h6>By : <a href="/authors/{{ $post->author->username }}"
+                                        class="text-decoration-none">{{ $post->author->name }}</a> in
+                                    <a class="text-decoration-none"
+                                        href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
+                                    </a>
+                                </h6>
+                                <p class="post-date">January 29, 2020</p>
+                                <a href="/posts/{{ $post->slug }}">
+                                    <h4 class="post-title">{{ $post->title }}</h4>
+                                </a>
+                                <p class="post-excerpt">{{ $post->excerpt }}</p>
+                                <a href="/posts/{{ $post->slug }}" class="post-permalink">READ MORE</a>
+                            </article>
+                        @endforeach
+                    @endif
 
 
 
@@ -103,17 +106,19 @@
                         </div>
                     </div>
                     <div class="sidebar-widget wow fadeInUp">
-                        <h5 class="widget-title">Categories</h5>
-                        <div class="widget-content">
-                            <ul class="category-list">
-                                @foreach ($posts as $post)
-                                    <li><a href="#!">{{ $post->category->name }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+
+                        <h5 class="widget-title">{!! $categories !!}</h5>
+                        @foreach ($posts->take(4) as $post)
+                            <div class="widget-content">
+                                <ul class="category-list">
+                                    <li><a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+                                    </li>
+                                </ul>
+                        @endforeach
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 @endsection

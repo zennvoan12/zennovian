@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('container')
     <main class="blog-standard">
         <div class="container">
@@ -105,17 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar-widget wow fadeInUp">
 
-                        <h5 class="widget-title">{!! $categories !!}</h5>
-                        @foreach ($posts->take(4) as $post)
-                            <div class="widget-content">
-                                <ul class="category-list">
-                                    <li><a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
-                                    </li>
-                                </ul>
-                        @endforeach
-                    </div>
                 </div>
             </div>
         </div>

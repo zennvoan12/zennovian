@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('pages.categories',[
+        return view('pages.categories', [
             'title' => 'Post Category',
             'categories' => Category::all()
         ]);
@@ -50,10 +50,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('pages.category', [
-            'title' => $category->name,
-            'posts' => $category->posts,
-            'category' => $category->name
+        return view('pages.posts', [
+            'title' => "Post Category : $category->name",
+            'posts' => $category->posts->load('author', 'category'),
+            'categories' => 'Category'
 
         ]);
     }

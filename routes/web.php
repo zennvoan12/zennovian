@@ -37,7 +37,7 @@ Route::controller(PostController::class)->group(function () {
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
+    Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('pages.posts');
 });
 
 

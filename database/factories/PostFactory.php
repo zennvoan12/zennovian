@@ -17,7 +17,7 @@ class PostFactory extends Factory
     public function definition()
     {
         $title = $this->faker->realText(50);
-        $paragraphs = $this->faker->paragraphs(rand(2, 6));
+        $paragraphs = $this->faker->paragraphs(mt_rand(5, 10));
         $post = "<h1>{$title}</h1>";
         foreach ($paragraphs as $para) {
             $post .= "<p>{$para}</p>";
@@ -26,9 +26,9 @@ class PostFactory extends Factory
             'title' => $title,
             'slug' => $this->faker->slug(),
             'excerpt' => $this->faker->paragraph(),
-            'body' => $post,
+            'body' =>  $post,
             'user_id' => mt_rand(1, 10),
-            'category_id' => mt_rand(1, 4)
+            'category_id' => mt_rand(1, 5)
         ];
     }
 }

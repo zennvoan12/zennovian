@@ -4,26 +4,28 @@
 @section('container')
     <main class="blog-post-single">
         <div class="container">
-            {{-- @foreach ($post as $item) --}}
             <h1 class="post-title wow fadeInUp">
-                <h1>{!! $post->$title !!}</h1>
+                <h1>{{ $post->$title }}</h1>
                 <div class="row">
                     <div class="col-md-8 blog-post-wrapper">
                         <div class="post-header wow fadeInUp">
-                            <img src="assets/images/Blog_single/Blog_single@2x.jpg" alt="blog post"
-                                class="post-featured-image">
+                            <img src="https://source.unsplash.com/1200x600?{{ $post->category->name }}" alt="blog post"
+                                class="post-featured-image img-fluid">
                         </div>
                         <div class="post-content wow fadeInUp">
                             <h6>By : <a href="/authors/{{ $post->author->username }}"
-                                    class="text-decoration-none">{{ $post->author->name }}</a> In <a
-                                    class="text-decoration-none"
+                                    class="text-decoration-none text-dark">{{ $post->author->name }}</a> In <a
+                                    class="text-decoration-none text-dark"
                                     href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
                                 </a></h6>
-                            <p class="post-date">January 29, 2020</p>
-                            {!! $post->body !!}
+                            <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
+                            <article class="post-content my-3">
+
+                                {!! $post->body !!}
+                            </article>
 
                         </div>
-                        {{-- @endforeach --}}
+
 
                         <div class="post-navigation wow fadeInUp">
                             <button class="btn prev-post"> Prev Post</button>
@@ -57,17 +59,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="sidebar-widget wow fadeInUp">
-                            <h5 class="widget-title">Tags</h5>
-                            <div class="widget-content">
-                                <a href="#!" class="post-tag">Design Studio</a>
-                                <a href="#!" class="post-tag">Creative Design</a>
-                                <a href="#!" class="post-tag">Marketing</a>
-                                <a href="#!" class="post-tag">Typography</a>
-                                <a href="#!" class="post-tag">Team</a>
-                                <a href="#!" class="post-tag">Project</a>
-                            </div>
-                        </div>
+
                         <div class="sidebar-widget wow fadeInUp">
                             <h5 class="widget-title">Share</h5>
                             <div class="widget-content">
@@ -134,18 +126,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar-widget wow fadeInUp">
-                            <h5 class="widget-title">Categories</h5>
-                            <div class="widget-content">
-                                <ul class="category-list">
-                                    <li><a href="#!">Animation</a></li>
-                                    <li><a href="#!">Branding</a></li>
-                                    <li><a href="#!">Graphic Design</a></li>
-                                    <li><a href="#!">Photography</a></li>
-                                    <li><a href="#!">Web Developing</a></li>
-                                </ul>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
         </div>

@@ -3,11 +3,11 @@
 @section('container')
     1 <main class="blog-grid-page mb-5">
         <div class="container">
-            <h1 class="oleez-page-title wow fadeInUp ">{{ $title }}</h1>
+            <h1 class="oleez-page-title wow fadeInUp text-center">{{ $title }}</h1>
             <div class="row">
                 @foreach ($categories as $category)
                     <div class="col-md-4">
-                        <a href="/categories/{{ $category->slug }}">
+                        <a href="/posts?category={{ $category->slug }}">
                             <div class="card text-bg-dark">
                                 <img src="https://source.unsplash.com/500x500?{{ $category->name }}" class="card-img"
                                     alt="...">

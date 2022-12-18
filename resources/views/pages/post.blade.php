@@ -16,7 +16,7 @@
                             <h6>By : <a href="/authors/{{ $post->author->username }}"
                                     class="text-decoration-none text-dark">{{ $post->author->name }}</a> In <a
                                     class="text-decoration-none text-dark"
-                                    href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
+                                    href="/posts?category={{ $post->category->slug }}">{{ $post->category->name }}
                                 </a></h6>
                             <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
                             <article class="post-content my-3">

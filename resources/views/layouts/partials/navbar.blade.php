@@ -9,13 +9,8 @@
             </a>
         </li>
 
-        <li class="nav-item dropdown d-none d-sm-block">
-            <a class="nav-link dropdown-toggle" href="#!" id="languageDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Join</a>
-            <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                <a class="dropdown-item" href="#!">Login</a>
-                <a class="dropdown-item" href="#!">Register</a>
-            </div>
+        <li class="nav-item ">
+            <a class="nav-link " href="/login">Join</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#!" data-toggle="offCanvasMenu">
@@ -50,15 +45,8 @@
                 </a>
             </li>
 
-            <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle " href="#!" id="languageDropdown" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Join</a>
-                <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                    <a class="dropdown-item {{ Request::url() == url('/home') ? 'active' : '' }}"
-                        href="#!">Login</a>
-                    <a class="dropdown-item {{ Request::url() == url('/home') ? 'active' : '' }}"
-                        href="#!">Register</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Join</a>
             </li>
             <li class="nav-item ml-5">
                 <a class="nav-link pr-0 nav-link-btn" href="#!" data-toggle="offCanvasMenu">

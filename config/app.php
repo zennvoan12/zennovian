@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        LaravelFrontendPresets\MaterialPreset\MaterialPresetServiceProvider::class,
         /*
          * Application Service Providers...
          */

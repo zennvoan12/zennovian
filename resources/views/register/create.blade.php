@@ -33,30 +33,52 @@
                                             @csrf
                                             <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" name="name"
-                                                    value="{{ old('name') }}">
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid
+                                                @enderror"
+                                                    name="name" value="{{ old('name') }}" required>
                                             </div>
                                             @error('name')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            <div class="input-group input-group-outline mt-3">
+                                                <label class="form-label">Username</label>
+                                                <input type="text"
+                                                    class="form-control @error('username') is-invalid
+                                                @enderror"
+                                                    name="username" value="{{ old('username') }}" required>
+                                            </div>
+                                            @error('username')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror
                                             <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email"
-                                                    value="{{ old('email') }}">
+                                                <input type="email"
+                                                    class="form-control @error('email') is-invalid
+                                                @enderror"
+                                                    name="email" value="{{ old('email') }}" required>
                                             </div>
                                             @error('email')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <div class="is-invalid">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror
                                             <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password">
+                                                <input type="password" class="form-control" name="password" required>
                                             </div>
                                             @error('password')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror
                                             <div class="form-check form-check-info text-start ps-0 mt-3">
                                                 <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" checked>
+                                                    id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                     I agree the <a href="javascript:;"
                                                         class="text-dark font-weight-bolder">Terms and Conditions</a>
@@ -86,17 +108,17 @@
     </div>
 
     @push('js')
-    <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
-    <script>
-        $(function() {
-    
-        var text_val = $(".input-group input").val();
-        if (text_val === "") {
-          $(".input-group").removeClass('is-filled');
-        } else {
-          $(".input-group").addClass('is-filled');
-        }
-    });
-    </script>
+        <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
+        <script>
+            $(function() {
+
+                var text_val = $(".input-group input").val();
+                if (text_val === "") {
+                    $(".input-group").removeClass('is-filled');
+                } else {
+                    $(".input-group").addClass('is-filled');
+                }
+            });
+        </script>
     @endpush
 </x-layout>

@@ -92,7 +92,8 @@
                             <h5 class="mb-0">Notifications</h5>
                             <p class="text-sm mb-0">
                                 Notifications on this page use Toasts from Bootstrap. Read more details <a
-                                    href="https://getbootstrap.com/docs/5.0/components/toasts/" target="
+                                    href="https://getbootstrap.com/docs/5.0/components/toasts/"
+                                    target="
           ">here</a>.
                             </p>
                         </div>
@@ -136,8 +137,8 @@
                         Hello, world! This is a notification message.
                     </div>
                 </div>
-                <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast"
-                    aria-atomic="true">
+                <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive"
+                    id="infoToast" aria-atomic="true">
                     <div class="toast-header bg-transparent border-0">
                         <i class="material-icons text-white me-2">
                             notifications
@@ -152,8 +153,8 @@
                         Hello, world! This is a notification message.
                     </div>
                 </div>
-                <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast"
-                    aria-atomic="true">
+                <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive"
+                    id="warningToast" aria-atomic="true">
                     <div class="toast-header border-0">
                         <i class="material-icons text-warning me-2">
                             travel_explore

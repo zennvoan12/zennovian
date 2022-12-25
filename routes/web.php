@@ -3,8 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Models\Post;
-use App\Models\User;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -26,7 +25,7 @@ Route::get('/', function () {
     return view('index', [
         "title" => "Home"
     ]);
-});
+})->name('home');
 Route::get('/about', function () {
     return view('pages.about', [
         'title' => 'About'
@@ -72,30 +71,37 @@ Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')-
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('billing', function () {
-        return view('pages.billing');
+        return view('dashboard.billing');
     })->name('billing');
+
     Route::get('tables', function () {
-        return view('pages.tables');
+        return view('dashboard.tables');
     })->name('tables');
-    Route::get('rtl', function () {
-        return view('pages.rtl');
-    })->name('rtl');
+
     Route::get('virtual-reality', function () {
-        return view('pages.virtual-reality');
+        return view('dashboard.virtual-reality');
     })->name('virtual-reality');
     Route::get('notifications', function () {
-        return view('pages.notifications');
+        return view('dashboard.notifications');
     })->name('notifications');
+
+    Route::get('posts', function () {
+        return view('dashboard.post-dashboard');
+    })->name('post-dashboard');
+
     Route::get('static-sign-in', function () {
-        return view('pages.static-sign-in');
+        return view('dashboard.static-sign-in');
     })->name('static-sign-in');
+
     Route::get('static-sign-up', function () {
-        return view('pages.static-sign-up');
+        return view('dashboard.static-sign-up');
     })->name('static-sign-up');
+
     Route::get('user-management', function () {
-        return view('pages.laravel-examples.user-management');
+        return view('dashboard.laravel-examples.user-management');
     })->name('user-management');
+
     Route::get('user-profile', function () {
-        return view('pages.laravel-examples.user-profile');
+        return view('dashboard.laravel-examples.user-profile');
     })->name('user-profile');
 });

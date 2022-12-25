@@ -32,35 +32,35 @@
 
                 <div class="container">
                     <div class="row">
-                        @if (is_iterable($posts))
-                            @foreach ($posts->skip(1) as $post)
-                                <div class="col-md-4 mb-2">
-                                    <article class="blog-post wow fadeInUp">
-                                        <div class="card">
-                                            <div class="position-absolute px-3 py-2"
-                                                style="background-color: rgba(0, 0, 0, 0.7)">
-                                                <a class="text-decoration-none text-white"
-                                                    href="/posts?category={{ $post->category->slug }}">
-                                                    {{ $post->category->name }}</a>
-                                            </div>
-                                            <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
-                                                class="card-img-top" alt="{{ $post->category->name }}">
-                                            <div class="card-body">
-                                                <h4 class="post-title">{{ $post->title }}</h4>
-
-                                                <h6>By : <a href="/posts?author={{ $post->author->username }}"
-                                                        class="text-decoration-none text-dark">{{ $post->author->name }}</a>
-
-                                                </h6>
-                                                <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
-                                                <p class="post-excerpt">{{ $post->excerpt }}</p>
-                                                <a href="/posts/{{ $post->slug }}" class="btn btn-primary">Read More</a>
-                                            </div>
+                        {{-- @if (is_iterable($posts)) --}}
+                        @foreach ($posts->skip(1) as $post)
+                            <div class="col-md-4 mb-2">
+                                <article class="blog-post wow fadeInUp">
+                                    <div class="card">
+                                        <div class="position-absolute px-3 py-2"
+                                            style="background-color: rgba(0, 0, 0, 0.7)">
+                                            <a class="text-decoration-none text-white"
+                                                href="/posts?category={{ $post->category->slug }}">
+                                                {{ $post->category->name }}</a>
                                         </div>
-                                    </article>
-                                </div>
-                            @endforeach
-                        @endif
+                                        <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
+                                            class="card-img-top" alt="{{ $post->category->name }}">
+                                        <div class="card-body">
+                                            <h4 class="post-title">{{ $post->title }}</h4>
+
+                                            <h6>By : <a href="/posts?author={{ $post->author->username }}"
+                                                    class="text-decoration-none text-dark">{{ $post->author->name }}</a>
+
+                                            </h6>
+                                            <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
+                                            <p class="post-excerpt">{{ $post->excerpt }}</p>
+                                            <a href="/posts/{{ $post->slug }}" class="btn btn-primary">Read More</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        @endforeach
+                        {{-- @endif --}}
                     </div>
                 </div>
 
@@ -79,8 +79,11 @@
     </main>
     @endif
 
-    <nav class="oleez-pagination wow fadeInUp d-flex justify-content-center">
-        {!! $posts->links() !!}
 
-    </nav>
+    <div class="oleez-pagination d-lg-flex justify-content-center mx-2 ">
+
+        {{ $posts->links('vendor.pagination.semantic-ui') }}
+    </div>
+
+
 @endsection

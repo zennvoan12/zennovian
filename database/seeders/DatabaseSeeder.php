@@ -22,9 +22,23 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@material.com',
             'password' => ('secret')
         ]);
+        User::factory()->create([
+            'name' => 'Creator',
+            'username' => 'creator88',
+            'email' => 'creator@material.com',
+            'password' => ('secret')
+        ]);
+        User::factory()->create([
+            'name' => 'Member',
+            'username' => 'member88',
+            'email' => 'memeber@material.com',
+            'password' => ('secret')
+        ]);
+
+
 
         User::factory(5)->create();
-        Post::factory(20)->create();
+        Post::factory(80)->create();
         $this->call([
             CategorySeeder::class
         ]);

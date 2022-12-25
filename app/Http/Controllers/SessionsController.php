@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,13 +26,13 @@ class SessionsController extends Controller
 
         if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
+                'email' => 'Login Failed'
             ]);
         }
 
         session()->regenerate();
 
-        return redirect('/dashboard');
+        return redirect()->intended('/dashboard');
     }
 
     public function show()
@@ -77,9 +77,12 @@ class SessionsController extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
         auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
 
         return redirect('/sign-in');
     }

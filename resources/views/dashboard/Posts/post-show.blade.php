@@ -23,7 +23,9 @@
                                     <a href="" class="btn btn-danger"> <i
                                             class="material-icons opacity-10">cancel </i> Delete</a>
                                     <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
-                                    <article class="post-content my-3">
+                                    <article class=" text-normal my-3 text-capitalize text-small opacity-7"
+                                        style="color: black; font-style:normal; font-size: 20px; font-weight: lighter;">
+
 
                                         {!! $post->body !!}
                                     </article>

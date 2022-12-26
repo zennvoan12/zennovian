@@ -75,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Route::resource('dashboard/post-dashboard', DashboardPostController::class)->name('post-dashboard');
 
-    Route::get('/dashboard/post/create/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+    Route::get('/dashboard/post/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
     Route::resource('dashboard/post', DashboardPostController::class)->names([
         'index' => 'post-dashboard',
         'show' => 'post-show',

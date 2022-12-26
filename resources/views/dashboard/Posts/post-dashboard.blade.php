@@ -4,6 +4,11 @@
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
         <!-- End Navbar -->
+        @if (session()->has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">

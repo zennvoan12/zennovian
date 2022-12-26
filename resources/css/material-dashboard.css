@@ -34,7 +34,7 @@
   --bs-warning: #fb8c00;
   --bs-danger: #F44335;
   --bs-light: #f0f2f5;
-  --bs-dark: #344767;
+  --bs-dark: #000000;
   --bs-white: #fff;
   --bs-primary-rgb: 233, 30, 99;
   --bs-secondary-rgb: 123, 128, 154;
@@ -56,7 +56,7 @@
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
-  --bs-body-color: #7b809a;
+  --bs-body-color: #000000;
   --bs-body-bg: #fff; }
 
 *,

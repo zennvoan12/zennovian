@@ -75,11 +75,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Route::resource('dashboard/post-dashboard', DashboardPostController::class)->name('post-dashboard');
 
-    Route::resource('post', DashboardPostController::class)->names([
+    Route::get('/dashboard/post/create/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+    Route::resource('dashboard/post', DashboardPostController::class)->names([
         'index' => 'post-dashboard',
-        'show' => 'post-show'
+        'show' => 'post-show',
+        'create' => 'post-create'
     ])->only([
-        'index', 'show'
+        'index', 'show', 'create', 'store'
     ]);
 
     Route::get('virtual-reality', function () {

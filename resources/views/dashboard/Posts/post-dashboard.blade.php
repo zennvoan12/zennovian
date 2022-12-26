@@ -15,6 +15,7 @@
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
+                                <a href="post/create/" class="btn btn-primary mx-4">Create New Post</a>
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>

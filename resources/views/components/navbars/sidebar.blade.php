@@ -51,7 +51,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ Request::url() == url('dashboard/post-dashboard') ? 'active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ Request::url() == url('dashboard/post') ? 'active bg-gradient-primary' : '' }} "
                     href="{{ route('post-dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">publish</i>
@@ -68,7 +68,6 @@
                     <span class="nav-link-text ms-1">Tables</span>
                 </a>
             </li> --}}
-
 
 
 

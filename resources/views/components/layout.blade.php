@@ -24,6 +24,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    {{-- trix --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/trix.css') }}">
+    <script type="text/javascript" src="{{ asset('assets/js/trix.js') }}"></script>
+
+    <style>
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="{{ $bodyClass }}">

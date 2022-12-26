@@ -16,12 +16,18 @@
                                         alt="blog post" class="post-featured-image img-fluid mb-4">
                                 </div>
                                 <div class="post-content wow fadeInUp">
-                                    <a href="{{ route('post-dashboard') }}" class="btn btn-success"> <i
-                                            class="material-icons opacity-10">arrow_back</i> Back To My Post</a>
+                                    <a href="{{ route('post-dashboard', ['post' => $post]) }}" class="btn btn-success">
+                                        <i class="material-icons opacity-10">arrow_back</i>
+                                        Back To My Post</a>
                                     <a href="" class="btn btn-warning"> <i
                                             class="material-icons opacity-10">edit</i> Edit</a>
-                                    <a href="" class="btn btn-danger"> <i
-                                            class="material-icons opacity-10">cancel </i> Delete</a>
+                                    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger "><i class="material-icons opacity-10"
+                                                onclick="return confirm('Are You Sure ?')">cancel</i> Delete</button>
+                                    </form>
+
                                     <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
                                     <article class=" text-normal my-3 text-capitalize text-small opacity-7"
                                         style="color: black; font-style:normal; font-size: 20px; font-weight: lighter;">

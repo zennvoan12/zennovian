@@ -16,7 +16,7 @@ class DashboardPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $posts)
     {
         return view('dashboard.Posts.post-dashboard', [
             'posts' => Post::where('user_id', auth()->user()->id)->get()
@@ -66,8 +66,10 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
+
         return view('dashboard.Posts.post-show', [
-            'post' => $post
+            'post' => $post,
+
         ]);
     }
 
@@ -102,7 +104,9 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Post::destroy($post->id);
+
+        return redirect('/dashboard/posts')->with('success', 'Post has been Deleted');
     }
 
     public function checkSlug(Request $request)

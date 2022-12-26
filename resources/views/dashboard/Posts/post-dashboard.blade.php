@@ -1,16 +1,17 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.sidebar activePage="tables"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="post-dashboard"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
-        <!-- End Navbar -->
-        @if (session()->has('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
-            </div>
-        @endif
+        <x-navbars.navs.auth titlePage="post-dashboard"></x-navbars.navs.auth>
+
         <div class="container-fluid py-4">
             <div class="row">
+                <!-- End Navbar -->
+                @if (session()->has('success'))
+                    <div class="alert alert-success col-12 text-white center" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -75,15 +76,22 @@
                                                         class="text-secondary text-xs font-weight-bold">{{ $post->created_at->diffForHumans() }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a href="post/{{ $post->slug }}" class="badge bg-info">
+                                                    <a href="{{ route('post-show', ['post' => $post]) }}"
+                                                        class="badge bg-info">
                                                         <i class="material-icons opacity-10">visibility</i>
                                                     </a>
                                                     <a href="" class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
-                                                    <a href="" class="badge bg-danger">
-                                                        <i class="material-icons opacity-10">cancel</i>
-                                                    </a>
+                                                    <form action="posts/{{ $post->slug }}" method="POST"
+                                                        class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="badge bg-danger border-0"><i
+                                                                class="material-icons opacity-10"
+                                                                onclick="return confirm('Are You Sure ?')">cancel</i></button>
+                                                    </form>
+
                                                 </td>
                                             </tr>
                                         @endforeach

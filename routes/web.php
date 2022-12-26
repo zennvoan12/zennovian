@@ -73,16 +73,25 @@ Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')-
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
 
-    // Route::resource('dashboard/post-dashboard', DashboardPostController::class)->name('post-dashboard');
 
-    Route::get('/dashboard/post/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
-    Route::resource('dashboard/post', DashboardPostController::class)->names([
+
+    Route::resource('dashboard/posts', DashboardPostController::class)->names([
         'index' => 'post-dashboard',
         'show' => 'post-show',
-        'create' => 'post-create'
+        'create' => 'post-create',
+        'destroy' => 'post-delete'
     ])->only([
-        'index', 'show', 'create', 'store'
+        'index', 'show', 'create', 'store', 'destroy'
     ]);
+
+    // Route::controller(DashboardPostController::class)->group(function () {
+    //     Route::get('dashboard/posts', [DashboardPostController::class, 'index'])->name('post-dashboard');
+    //     Route::get('dashboard/posts/{post:slug}', [DashboardPostController::class, 'show'])->name('post-show');
+    //     Route::post('dashboard/posts/create', [DashboardPostController::class, 'index'])->name('post-create');
+    //     Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+    //     // Route::delete('dashboard/posts/{post:id}', [DashboardPostController::class, 'destroy'])->name('post-dashboard')->where('slug', '[\w-]+');
+    //     Route::delete('dashboard/posts/{post:slug}', [DashboardPostController::class, 'destroy'])->name('post-delete')->where('slug', '[\w-]+');
+    // });
 
     Route::get('virtual-reality', function () {
         return view('dashboard.virtual-reality');

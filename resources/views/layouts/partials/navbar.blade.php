@@ -52,7 +52,7 @@
             <li class="nav-item {{ Request::url() == url('/categories') ? 'active' : '' }}">
                 <a class="nav-link" href="/categories">Categories</a>
             </li>
-            <li class="nav-item {{ Request::url() == url('/blog') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::url() == url('/posts') ? 'active' : '' }}">
                 <a class="nav-link" href="/posts">Blog</a>
             </li>
         </ul>

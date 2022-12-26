@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -59,6 +60,7 @@ Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest'
 Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
 Route::post('reset-password', [SessionsController::class, 'update'])->middleware('guest')->name('password.update');
+
 Route::get('verify', function () {
     return view('sessions.password.verify');
 })->middleware('guest')->name('verify');
@@ -70,24 +72,23 @@ Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('aut
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('billing', function () {
-        return view('dashboard.billing');
-    })->name('billing');
 
-    Route::get('tables', function () {
-        return view('dashboard.tables');
-    })->name('tables');
+    // Route::resource('dashboard/post-dashboard', DashboardPostController::class)->name('post-dashboard');
+
+    Route::resource('post', DashboardPostController::class)->names([
+        'index' => 'post-dashboard',
+        'show' => 'post-show'
+    ])->only([
+        'index', 'show'
+    ]);
 
     Route::get('virtual-reality', function () {
         return view('dashboard.virtual-reality');
     })->name('virtual-reality');
-    Route::get('notifications', function () {
+    Route::get('dashboard/notifications', function () {
         return view('dashboard.notifications');
     })->name('notifications');
 
-    Route::get('posts', function () {
-        return view('dashboard.post-dashboard');
-    })->name('post-dashboard');
 
     Route::get('static-sign-in', function () {
         return view('dashboard.static-sign-in');

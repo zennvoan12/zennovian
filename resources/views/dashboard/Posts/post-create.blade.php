@@ -4,7 +4,7 @@
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Post"></x-navbars.navs.auth>
         <!-- End Navbar -->
-        <div class="container-fluid py-4">
+        <div class="container py-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
@@ -69,12 +69,12 @@
                             </div>
                         </div> --}}
 
-                        <div class="p-4 bg-light">
+                        <div class="p-4 ">
                             <form method="POST" action="{{ route('post-dashboard') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline my-3">
+                                    <div class="col-md-10">
+                                        <div class="input-group input-group-dynamic my-3">
                                             <label for="title" class="form-label">Title</label>
                                             <input type="text"
                                                 class="form-control @error('title') is-invalid @enderror" id="title"
@@ -86,11 +86,11 @@
                                             @enderror
                                         </div>
 
-                                        <div class="input-group input-group-outline my-3">
+                                        <div class="input-group input-group-text my-3">
                                             <label for="slug" class="form-label d-none">Slug</label>
                                             <input type="text"
                                                 class="form-control @error('slug') is-invalid @enderror" id="slug"
-                                                name="slug" value="{{ old('slug') }}">
+                                                name="slug" value="{{ old('slug') }}" readonly disabled>
                                             @error('slug')
                                                 <div class="alert alert-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -116,8 +116,10 @@
                                         <div class="input-group input-group-outline my-3">
                                             <div class="mb-3">
                                                 <label for="image">Upload Image</label>
+                                                <img class="img-preview img-fluid mb-3 col-sm-5">
                                                 <input class="form-control @error('image') is-invalid @enderror"
-                                                    type="file" id="image" name="image">
+                                                    type="file" id="image" name="image"
+                                                    onchange="previewImage()">
                                                 @error('image')
                                                     <div class="alert alert-danger" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -167,5 +169,40 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
+
+        // function previewImage() {
+
+        //     const image = document.querySelector('#image');
+        //     const imgPreview = document.querySelector('.img-preview');
+
+        //     imgPreview.style.display = 'block';
+
+        //     const oFReader = new FileReader();
+        //     oFReader.readAsDataURL(image.files[0]);
+
+        //     oFReader.onload = function(oFREader) {
+        //         imgPreview.src = oFREader.target.result;
+
+        //     }
+        // }
+        const previewImage = () => {
+            const {
+                files
+            } = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(files[0]);
+
+            oFReader.onload = ({
+                target: {
+                    result
+                }
+            }) => {
+                imgPreview.src = `${result}`;
+            }
+        }
     </script>
 </x-layout>

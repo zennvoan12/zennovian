@@ -39,8 +39,8 @@
 
     {{ $slot }}
     {{-- sweetalert lib --}}
-    <script src="{{ mix('resources/js/app.js') }}"></script>
-    <link rel="stylesheet" href="{{ mix('resources/scss/app.scss') }}">
+    <link rel="stylesheet" href="{{ asset('assets/@sweetalert2/theme-material-ui/material-ui.css') }}">
+    <script src="{{ asset('assets/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
     <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
@@ -57,8 +57,7 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
 
-        Swal.fire('Any fool can use a computer');
-
+        
 
         // const Toast = Swal.mixin({
         //     toast:true,

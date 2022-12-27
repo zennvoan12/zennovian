@@ -34,7 +34,7 @@ Route::get('/about', function () {
 });
 
 Route::controller(PostController::class)->group(function () {
-    Route::get('/posts', 'index');
+    Route::get('/posts', 'index')->name('pages.posts');
     Route::get('/posts/{post:slug}', 'show');
 });
 
@@ -79,9 +79,11 @@ Route::group(['middleware' => 'auth'], function () {
         'index' => 'post-dashboard',
         'show' => 'post-show',
         'create' => 'post-create',
-        'destroy' => 'post-delete'
+        'edit' => 'post-edit',
+        'destroy' => 'post-delete',
+        'update' => 'post-edit'
     ])->only([
-        'index', 'show', 'create', 'store', 'destroy'
+        'index', 'show', 'create', 'edit', 'store', 'destroy', 'update'
     ]);
 
     // Route::controller(DashboardPostController::class)->group(function () {

@@ -10,7 +10,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Edit Post</h6>
+                                <h6 class="text-white text-capitalize ps-3">Create New Post</h6>
                             </div>
                         </div>
                         <div class="card-body ">
@@ -18,13 +18,16 @@
                             <div class="col-lg-8">
                                 <div class="card-body">
 
-                                    <form method="POST" action="{{ route('post-dashboard') }}" class="form-">
+                                    <form method="POST" action="{{ route('post-show', ['post' => $post]) }}"
+                                        class="form-">
+                                        @method('put')
                                         @csrf
                                         <div class="mb-3">
                                             <label for="title" class="form-label">Title</label>
                                             <input type="text"
                                                 class="form-control @error('title') is-invalid @enderror" id="title"
-                                                name="title" required autofocus value="{{ old('title') }}">
+                                                name="title" required autofocus
+                                                value="{{ old('title', $post->title) }}">
                                             @error('title')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -34,13 +37,13 @@
                                         <div class="mb-3">
                                             <label for="slug" class="form-label">Slug</label>
                                             <input type="text" class="form-control" id="slug" name="slug"
-                                                value="{{ old('slug') }}">
+                                                value="{{ old('slug', $post->slug) }}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="category" class="form-label">Category</label>
                                             <select class="form-select text-center" name="category_id">
                                                 @foreach ($categories as $category)
-                                                    @if (old('category_id') == $category->id)
+                                                    @if (old('category_id', $post->category->id) == $category->id)
                                                         <option value="{{ $category->id }}" selected>
                                                             {{ $category->name }}
                                                         </option>
@@ -58,12 +61,12 @@
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                             <input id="body" type="hidden" name="body"
-                                                value="{{ old('body') }}">
+                                                value="{{ old('body', $post->body) }}">
                                             <trix-editor input="body"></trix-editor>
 
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Create Post</button>
+                                        <button type="submit" class="btn btn-primary">Update </button>
                                     </form>
                                 </div>
                             </div>

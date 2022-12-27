@@ -21,7 +21,7 @@
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
-                                <a href="post/create/" class="btn btn-primary mx-4">Create New Post</a>
+                                <a href="{{ route('post-create') }}" class="btn btn-primary mx-4">Create New Post</a>
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
@@ -80,7 +80,8 @@
                                                         class="badge bg-info">
                                                         <i class="material-icons opacity-10">visibility</i>
                                                     </a>
-                                                    <a href="" class="badge bg-warning">
+                                                    <a href="{{ route('post-show', ['post' => $post]) }}/edit"
+                                                        class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
                                                     <form action="posts/{{ $post->slug }}" method="POST"

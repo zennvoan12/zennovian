@@ -66,6 +66,10 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
+        if ($post->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+
 
         return view('dashboard.Posts.post-show', [
             'post' => $post,
@@ -81,7 +85,10 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('dashboard.Posts.post-edit', [
+            'post' => $post,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -93,7 +100,27 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $rules = ([
+            'title' => 'required|max:255',
+            // 'slug' => 'required|unique:posts',
+            'category_id' => 'required',
+            'body' => 'required'
+        ]);
+
+        if ($request->slug != $post->slug) {
+            $rules['slug'] = 'required|unique:posts';
+        }
+        if ($post->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        $validatedData = $request->validate($rules);
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
+
+        Post::where('id', $post->id)->update($validatedData);
+
+        return redirect()->route('post-dashboard')->with('success', ' Post has been Updated');
     }
 
     /**

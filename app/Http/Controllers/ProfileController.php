@@ -32,7 +32,7 @@ class ProfileController extends Controller
         $attributes = $request->validate([
             'email' => 'required|email|unique:users,email,' . $user->id,
             'name' => 'required',
-            'phone' => 'required|max:10',
+            'phone' => 'required|max:12',
             'about' => 'required:max:150',
             'location' => 'required'
         ]);

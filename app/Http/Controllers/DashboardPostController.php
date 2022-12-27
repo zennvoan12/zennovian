@@ -60,7 +60,7 @@ class DashboardPostController extends Controller
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
         Post::create($validatedData);
-
+        
         return redirect()->route('post-dashboard')->with('success', 'New Post Added');
     }
 

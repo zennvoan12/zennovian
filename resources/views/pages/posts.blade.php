@@ -7,8 +7,16 @@
 
             @if ($posts->count())
                 <div class="card mb-3">
-                    <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top"
-                        alt="...">
+                    @if ($posts[0]->image)
+                        <div style="max-height: 350px; overflow: hidden;">
+
+                            <img src="{{ asset('storage/' . $posts[0]->image) }}" alt="{{ $posts[0]->category->name }}"
+                                class="post-featured-image img-fluid mb-4">
+                        </div>
+                    @else
+                        <img src="https://source.unsplash.com/1200x600?{{ $posts[0]->category->name }}"
+                            alt="{{ $posts[0]->category->name }}" class="post-featured-image img-fluid mb-4">
+                    @endif
                     <div class="card-body text-center">
                         <h2 class="card-title"><a href="/posts/{{ $posts[0]->slug }}"
                                 class="text-decoration-none text-dark">{{ $posts[0]->title }}</a></h2>
@@ -43,8 +51,13 @@
                                                 href="/posts?category={{ $post->category->slug }}">
                                                 {{ $post->category->name }}</a>
                                         </div>
-                                        <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
-                                            class="card-img-top" alt="{{ $post->category->name }}">
+                                        @if ($post->image)
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="blog post"
+                                                class="post-featured-image img-fluid mb-4">
+                                        @else
+                                            <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
+                                                class="card-img-top" alt="{{ $post->category->name }}">
+                                        @endif
                                         <div class="card-body">
                                             <h4 class="post-title">{{ $post->title }}</h4>
 

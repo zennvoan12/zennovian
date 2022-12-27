@@ -12,8 +12,16 @@
                         <div class="row">
                             <div class="col-lg-8 blog-post-wrapper">
                                 <div class="post-header wow fadeInUp">
-                                    <img src="https://source.unsplash.com/1200x600?{{ $post->category->name }}"
-                                        alt="blog post" class="post-featured-image img-fluid mb-4">
+                                    @if ($post->image)
+                                        <div style="max-height: 350px; overflow: hidden;">
+
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="blog post"
+                                                class="post-featured-image img-fluid mb-4">
+                                        </div>
+                                    @else
+                                        <img src="https://source.unsplash.com/1200x600?{{ $post->category->name }}"
+                                            alt="blog post" class="post-featured-image img-fluid mb-4">
+                                    @endif
                                 </div>
                                 <div class="post-content wow fadeInUp">
                                     <a href="{{ route('post-dashboard', ['post' => $post]) }}" class="btn btn-success">

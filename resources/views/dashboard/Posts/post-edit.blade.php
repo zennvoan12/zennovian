@@ -70,6 +70,10 @@
                                     </form> --}}
 
                                     <div class="p-4">
+                                        <a href="{{ route('post-dashboard', ['post' => $post]) }}"
+                                            class="btn btn-success">
+                                            <i class="material-icons opacity-10">arrow_back</i>
+                                            Back To My Post</a>
                                         <form method="POST" action="{{ route('post-show', ['post' => $post]) }}"
                                             enctype="multipart/form-data">
                                             @method('put')
@@ -81,7 +85,7 @@
                                                         <input type="text"
                                                             class="form-control @error('title') is-invalid @enderror"
                                                             id="title" name="title" required
-                                                            value="{{ old('title', $post->title) }}" autofocus>
+                                                            value="{{ old('title', $post->title) }}" required>
                                                         @error('title')
                                                             <div class="alert alert-danger" role="alert">
                                                                 <strong>{{ $message }}</strong>

@@ -70,6 +70,10 @@
                                     </form> --}}
 
                                     <div class="p-4">
+                                        <a href="{{ route('post-dashboard', ['post' => $post]) }}"
+                                            class="btn btn-success">
+                                            <i class="material-icons opacity-10">arrow_back</i>
+                                            Back To My Post</a>
                                         <form method="POST" action="{{ route('post-show', ['post' => $post]) }}"
                                             enctype="multipart/form-data">
                                             @method('put')
@@ -81,7 +85,7 @@
                                                         <input type="text"
                                                             class="form-control @error('title') is-invalid @enderror"
                                                             id="title" name="title" required
-                                                            value="{{ old('title', $post->title) }}" autofocus>
+                                                            value="{{ old('title', $post->title) }}" required>
                                                         @error('title')
                                                             <div class="alert alert-danger" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -92,8 +96,7 @@
                                                     <div class="input-group input-group-outline my-3">
                                                         <label for="slug" class="form-label d-none">Slug</label>
                                                         <input type="text" class="form-control" id="slug"
-                                                            name="slug" value="{{ old('slug', $post->slug) }}"
-                                                            readonly disabled>
+                                                            name="slug" value="{{ old('slug', $post->slug) }}">
                                                         @error('slug')
                                                             <div class="alert alert-danger" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -120,7 +123,14 @@
                                                     <div class="input-group input-group-outline my-3">
                                                         <div class="mb-3">
                                                             <label for="image">Upload Image</label>
-                                                            <img class="img-preview img-fluid mb-3 col-sm-5">
+                                                            <input type="hidden" name="oldImage"
+                                                                value="{{ $post->image }}">
+                                                            @if ($post->image)
+                                                                <img src="{{ asset('storage/' . $post->image) }}"
+                                                                    class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                                                            @else
+                                                                <img class="img-preview img-fluid mb-3 col-sm-5">
+                                                            @endif
                                                             <input
                                                                 class="form-control @error('image') is-invalid @enderror"
                                                                 type="file" id="image" name="image"
@@ -178,5 +188,24 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
+        const previewImage = () => {
+            const {
+                files
+            } = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(files[0]);
+
+            oFReader.onload = ({
+                target: {
+                    result
+                }
+            }) => {
+                imgPreview.src = `${result}`;
+            }
+        }
     </script>
 </x-layout>

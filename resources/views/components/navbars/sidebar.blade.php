@@ -8,7 +8,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href="/posts">
             <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white">{{ config('app.name') }}</span>
+            <span class="ms-2 font-weight-bold text-white">{{ config('app.name') }} </span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -37,9 +37,7 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pages</h6>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('dashboard') }}">
@@ -81,16 +79,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('notifications') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Notifications</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'profile' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('profile') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -99,6 +87,21 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
+            @can('admin')
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Creator</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'category' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">category</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Post Category</span>
+                    </a>
+                </li>
+            @endcan
+
 
 
         </ul>

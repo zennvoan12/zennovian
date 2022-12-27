@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CreatorCategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
@@ -119,3 +120,11 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard.laravel-examples.user-profile');
     })->name('user-profile');
 });
+
+
+Route::resource('/dashboard/categories', CreatorCategoryController::class)->except('show')
+    ->middleware('admin:1')
+    ->names([
+        'index' => 'index',
+        'create' => 'category-create'
+    ]);;

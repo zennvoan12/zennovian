@@ -90,7 +90,7 @@
                                             <label for="slug" class="form-label d-none">Slug</label>
                                             <input type="text"
                                                 class="form-control @error('slug') is-invalid @enderror" id="slug"
-                                                name="slug" value="{{ old('slug') }}" readonly disabled>
+                                                name="slug" value="{{ old('slug') }}" readonly>
                                             @error('slug')
                                                 <div class="alert alert-danger" role="alert">
                                                     <strong>{{ $message }}</strong>

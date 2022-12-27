@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
@@ -105,27 +106,76 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $rules = ([
-            'title' => 'required|max:255',
-            // 'slug' => 'required|unique:posts',
-            'category_id' => 'required',
-            'body' => 'required'
-        ]);
+        // $rules = ([
+        //     'title' => 'required|max:255',
+        //     // 'slug' => 'required|unique:posts',
+        //     'category_id' => 'required',
+        //     'image' => 'image|file|max:2000',
+        //     'body' => 'required'
+        // ]);
 
+        // if ($request->slug != $post->slug) {
+        //     $rules['slug'] = 'required|unique:posts';
+        // }
+        // if ($post->author->id !== auth()->user()->id) {
+        //     abort(403);
+        // }
+        // if ($request->file('image')) {
+        //     $validatedData['image'] = $request->file('image')->store('post-images');
+        // }
+
+        // $validatedData = $request->validate($rules);
+        // if ($request->file('image')) {
+        //     if ($request->oldImage) {
+        //         Storage::delete($request->oldImage);
+        //     }
+        //     $validatedData['image'] = $request->file('image')->store('post-images');
+        // }
+        // $validatedData['user_id'] = auth()->user()->id;
+        // $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
+
+        // Post::where('id', $post->id)->update($validatedData);
+
+        // return redirect()->route('post-dashboard')->with('success', ' Post has been Updated');
+        $rules = [
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'image' => 'image|file|max:2000',
+            'body' => 'required'
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        // Jika slug diubah, validasi slug agar tidak duplikat
         if ($request->slug != $post->slug) {
-            $rules['slug'] = 'required|unique:posts';
+            $validatedData['slug'] = 'required|unique:posts';
         }
+
+        // Jika pengguna tidak merupakan author dari post, maka akses ditolak
         if ($post->author->id !== auth()->user()->id) {
             abort(403);
         }
 
-        $validatedData = $request->validate($rules);
+        // Jika file gambar diunggah
+        if ($request->file('image')) {
+            // Hapus file gambar lama jika ada
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+
+            // Simpan file gambar baru
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
+
+        // Tambahkan informasi pengguna yang login dan excerpt dari body
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
+        // Update post dengan data yang telah divalidasi
         Post::where('id', $post->id)->update($validatedData);
 
-        return redirect()->route('post-dashboard')->with('success', ' Post has been Updated');
+        // Kembali ke halaman post dashboard dengan pesan sukses
+        return redirect()->route('post-dashboard')->with('success', 'Post has been Updated');
     }
 
     /**
@@ -136,14 +186,19 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        Post::destroy($post->id);
+        if ($post->image) {
+            Storage::delete($post->image);
+        }
 
-        return redirect('/dashboard/posts')->with('success', 'Post has been Deleted');
+        $post->delete();
+        return redirect()->route('post-dashboard')->with('success', 'Post has been Deleted');
     }
 
     public function checkSlug(Request $request)
     {
+
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+
         return response()->json(['slug' => $slug]);
     }
 }

@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('assets') }}/img/favicon.png">
     <title>
-        {{ config('app.name') }}
+        {{ config('app.name') }} ::
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -38,11 +38,15 @@
 <body class="{{ $bodyClass }}">
 
     {{ $slot }}
+    {{-- sweetalert lib --}}
+    <script src="{{ mix('resources/js/app.js') }}"></script>
+    <link rel="stylesheet" href="{{ mix('resources/scss/app.scss') }}">
 
     <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
     <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
+
     @stack('js')
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
@@ -52,11 +56,21 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+
+        Swal.fire('Any fool can use a computer');
+
+
+        // const Toast = Swal.mixin({
+        //     toast:true,
+        //     position:
+        // })
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
+
+
 </body>
 
 </html>

@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(Post $req)
+    public function index()
     {
-        $req = route('post-create');
+
         return view('dashboard.index', [
-            'post' => $req
+            'title' => 'Dashboard'
         ]);
     }
 }

@@ -17,14 +17,28 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory()->create([
-            'name' => 'Admin',
+            'name' => 'Farhan Novian',
             'username' => 'admin88',
             'email' => 'admin@material.com',
             'password' => ('secret')
         ]);
+        User::factory()->create([
+            'name' => 'Creator',
+            'username' => 'creator88',
+            'email' => 'creator@material.com',
+            'password' => ('secret')
+        ]);
+        User::factory()->create([
+            'name' => 'Member',
+            'username' => 'member88',
+            'email' => 'memeber@material.com',
+            'password' => ('secret')
+        ]);
+
+
 
         User::factory(5)->create();
-        Post::factory(20)->create();
+        Post::factory(80)->create();
         $this->call([
             CategorySeeder::class
         ]);

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('container')
-    1 <main class="blog-grid-page mb-5">
+    <main class="blog-grid-page mb-5">
         <div class="container">
             <h1 class="oleez-page-title wow fadeInUp text-center">{{ $title }}</h1>
             <div class="row">

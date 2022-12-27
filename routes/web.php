@@ -3,10 +3,10 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Models\Post;
-use App\Models\User;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('index', [
         "title" => "Home"
     ]);
-});
+})->name('home');
 Route::get('/about', function () {
     return view('pages.about', [
         'title' => 'About'
@@ -34,7 +34,7 @@ Route::get('/about', function () {
 });
 
 Route::controller(PostController::class)->group(function () {
-    Route::get('/posts', 'index');
+    Route::get('/posts', 'index')->name('pages.posts');
     Route::get('/posts/{post:slug}', 'show');
 });
 
@@ -60,6 +60,7 @@ Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest'
 Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
 Route::post('reset-password', [SessionsController::class, 'update'])->middleware('guest')->name('password.update');
+
 Route::get('verify', function () {
     return view('sessions.password.verify');
 })->middleware('guest')->name('verify');
@@ -71,31 +72,50 @@ Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('aut
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('billing', function () {
-        return view('pages.billing');
-    })->name('billing');
-    Route::get('tables', function () {
-        return view('pages.tables');
-    })->name('tables');
-    Route::get('rtl', function () {
-        return view('pages.rtl');
-    })->name('rtl');
+
+
+
+    Route::resource('dashboard/posts', DashboardPostController::class)->names([
+        'index' => 'post-dashboard',
+        'show' => 'post-show',
+        'create' => 'post-create',
+        'edit' => 'post-edit',
+        'destroy' => 'post-delete',
+        'update' => 'post-edit'
+    ])->only([
+        'index', 'show', 'create', 'edit', 'store', 'destroy', 'update'
+    ]);
+
+    // Route::controller(DashboardPostController::class)->group(function () {
+    //     Route::get('dashboard/posts', [DashboardPostController::class, 'index'])->name('post-dashboard');
+    //     Route::get('dashboard/posts/{post:slug}', [DashboardPostController::class, 'show'])->name('post-show');
+    //     Route::post('dashboard/posts/create', [DashboardPostController::class, 'index'])->name('post-create');
+    //     Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+    //     // Route::delete('dashboard/posts/{post:id}', [DashboardPostController::class, 'destroy'])->name('post-dashboard')->where('slug', '[\w-]+');
+    //     Route::delete('dashboard/posts/{post:slug}', [DashboardPostController::class, 'destroy'])->name('post-delete')->where('slug', '[\w-]+');
+    // });
+
     Route::get('virtual-reality', function () {
-        return view('pages.virtual-reality');
+        return view('dashboard.virtual-reality');
     })->name('virtual-reality');
-    Route::get('notifications', function () {
-        return view('pages.notifications');
+    Route::get('dashboard/notifications', function () {
+        return view('dashboard.notifications');
     })->name('notifications');
+
+
     Route::get('static-sign-in', function () {
-        return view('pages.static-sign-in');
+        return view('dashboard.static-sign-in');
     })->name('static-sign-in');
+
     Route::get('static-sign-up', function () {
-        return view('pages.static-sign-up');
+        return view('dashboard.static-sign-up');
     })->name('static-sign-up');
+
     Route::get('user-management', function () {
-        return view('pages.laravel-examples.user-management');
+        return view('dashboard.laravel-examples.user-management');
     })->name('user-management');
+
     Route::get('user-profile', function () {
-        return view('pages.laravel-examples.user-profile');
+        return view('dashboard.laravel-examples.user-profile');
     })->name('user-profile');
 });

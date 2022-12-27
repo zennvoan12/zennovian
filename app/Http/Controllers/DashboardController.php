@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Post $req)
     {
-        return view('dashboard.index');
+        $req = route('post-create');
+        return view('dashboard.index', [
+            'post' => $req
+        ]);
     }
 }

@@ -9,9 +9,27 @@
             </a>
         </li>
 
-        <li class="nav-item ">
-            <a class="nav-link " href="/login">Join</a>
-        </li>
+        @auth
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " href="#!" id="languageDropdown" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Welcome Back, {{ auth()->user()->name }}</a>
+                <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <a class="dropdown-item" href="/profile">Profile</a>
+                    <a class="dropdown-item" href="/dashboard">My Dashboard</a>
+                    <form method="POST" action="{{ route('logout') }}">
+
+                        @csrf
+                        <button type="submit" class="dropdown-item">Sign Out</button>
+
+                    </form>
+                    </form>
+                </div>
+            </li>
+        @else
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Join</a>
+            </li>
+        @endauth
         <li class="nav-item">
             <a class="nav-link" href="#!" data-toggle="offCanvasMenu">
                 <img src="{{ asset('assets/images/social icon@2x.svg') }}" alt="social-nav-toggle">
@@ -34,7 +52,7 @@
             <li class="nav-item {{ Request::url() == url('/categories') ? 'active' : '' }}">
                 <a class="nav-link" href="/categories">Categories</a>
             </li>
-            <li class="nav-item {{ Request::url() == url('/blog') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::url() == url('/posts') ? 'active' : '' }}">
                 <a class="nav-link" href="/posts">Blog</a>
             </li>
         </ul>
@@ -45,9 +63,27 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Join</a>
-            </li>
+            @auth
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#!" id="languageDropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Welcome Back, {{ auth()->user()->name }}</a>
+                    <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <a class="dropdown-item" href="/profile">Profile</a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item" href="/dashboard">My Dashboard</a>
+                        <hr class="dropdown-divider">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Sign Out</button>
+
+                        </form>
+                    </div>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Join</a>
+                </li>
+            @endauth
             <li class="nav-item ml-5">
                 <a class="nav-link pr-0 nav-link-btn" href="#!" data-toggle="offCanvasMenu">
                     <img src="{{ asset('assets/images/social icon@2x.svg') }}" alt="social-nav-toggle">

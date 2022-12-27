@@ -8,23 +8,36 @@ class ProfileController extends Controller
 {
     public function create()
     {
-        return view('pages.profile');
+        return view('dashboard.profile');
     }
 
-    public function update()
+    // public  function update()
+    // {
+
+    //     $user = request()->user();
+    //     $attributes = request()->validate([
+    //         'email' => 'required|email|unique:users,email,' . $user->id,
+    //         'name' => 'required',
+    //         'phone' => 'required|max:10',
+    //         'about' => 'required:max:150',
+    //         'location' => 'required'
+    //     ]);
+
+    //     auth()->user()->update($attributes);
+    //     return back()->withStatus('Profile successfully updated.');
+    // }
+    public function update(Request $request)
     {
-            
-        $user = request()->user();
-        $attributes = request()->validate([
-            'email' => 'required|email|unique:users,email,'.$user->id,
+        $user = $request->user();
+        $attributes = $request->validate([
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'name' => 'required',
-            'phone' => 'required|max:10',
+            'phone' => 'required|max:12',
             'about' => 'required:max:150',
             'location' => 'required'
         ]);
 
-        auth()->user()->update($attributes);
-        return back()->withStatus('Profile successfully updated.');
-    
-}
+        $user->update($attributes);
+        return redirect()->back()->with('status', 'Profile successfully updated.');
+    }
 }

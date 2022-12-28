@@ -65,16 +65,13 @@
 
 
 
-                                                {{-- <td class="align-middle text-center">
-                                                    <a href="{{ route('category-show', ['category' => $category]) }}"
-                                                        class="badge bg-info">
-                                                        <i class="material-icons opacity-10">visibility</i>
-                                                    </a>
-                                                    <a href="{{ route('category-show', ['category' => $category]) }}/edit"
+                                                <td class="align-middle text-center">
+
+                                                    <a href="{{ route('category-edit', ['category' => $category]) }}/edit"
                                                         class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
-                                                    <form action="posts/{{ $post->slug }}" method="POST"
+                                                    <form action="categories/{{ $category->slug }}" method="POST"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
@@ -83,7 +80,7 @@
                                                                 onclick="return confirm('Are You Sure ?')">cancel</i></button>
                                                     </form>
 
-                                                </td> --}}
+                                                </td>
                                             </tr>
                                         @endforeach
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Cviebrock\EloquentSluggable\Services\SlugService;
+
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class CreatorCategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.Categories.index', [
+        return view('dashboard.Categories.category-dashboard', [
             'categories' => Category::all()
         ]);
     }
@@ -27,7 +29,9 @@ class CreatorCategoryController extends Controller
     public function create()
     {
 
-        return view('dashboard.Categories.category-create');
+        return view('dashboard.Categories.category-create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -38,7 +42,19 @@ class CreatorCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'slug' => 'required|unique:categories',
+
+        ]);
+        Category::create($validatedData);
+
+        $notif = [
+            'message' => 'Data has been Added',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('index')->with($notif);
     }
 
     /**
@@ -60,7 +76,10 @@ class CreatorCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.Categories.category-edit', [
+            'category' => $category,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -72,7 +91,29 @@ class CreatorCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $rules = [
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'image' => 'image|file|max:2000',
+            'body' => 'required'
+        ];
+        $validatedData = $request->validate($rules);
+
+        if ($request->slug != $category->slug) {
+            $validatedData['slug'] = 'required|unique:posts';
+        }
+
+        if ($category->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+        Category::where('id', $category->id)->update($validatedData);
+        $notif = [
+            'message' => 'Data has been Updated',
+            'alert-type' => 'success'
+        ];
+
+        // Kembali ke halaman post dashboard dengan pesan sukses
+        return redirect()->route('category-dashboard')->with($notif);
     }
 
     /**
@@ -83,6 +124,20 @@ class CreatorCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        $notif = [
+            'message' => 'Data has been Deleted',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('categories.destroy')->with($notif);
+    }
+
+
+    public function checkSlug(Request $request)
+    {
+
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+
+        return response()->json(['slug' => $slug]);
     }
 }

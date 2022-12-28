@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardCreatorController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -84,15 +85,20 @@ Route::group(['middleware' => 'auth'], function () {
         'destroy' => 'post-delete',
         'update' => 'post-edit'
     ]);
+    Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')
+        ->middleware('admin:admin')
+        ->names([
+            'index' => 'category-dashboard',
+            'create' => 'category-create',
+            'edit' => 'category-edit',
+            'update' => 'category-edit',
+            'destroy' => 'category-delete'
+        ])->except('show');
 
-    // Route::controller(DashboardPostController::class)->group(function () {
-    //     Route::get('dashboard/posts', [DashboardPostController::class, 'index'])->name('post-dashboard');
-    //     Route::get('dashboard/posts/{post:slug}', [DashboardPostController::class, 'show'])->name('post-show');
-    //     Route::post('dashboard/posts/create', [DashboardPostController::class, 'index'])->name('post-create');
-    //     Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
-    //     // Route::delete('dashboard/posts/{post:id}', [DashboardPostController::class, 'destroy'])->name('post-dashboard')->where('slug', '[\w-]+');
-    //     Route::delete('dashboard/posts/{post:slug}', [DashboardPostController::class, 'destroy'])->name('post-delete')->where('slug', '[\w-]+');
-    // });
+
+    Route::resource('/dashboard/users', DashboardCreatorController::class)->names([
+        'index' => 'user-dashboard',
+    ])->except('show');
 
     Route::get('virtual-reality', function () {
         return view('dashboard.virtual-reality');
@@ -110,22 +116,11 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard.static-sign-up');
     })->name('static-sign-up');
 
-    Route::get('user-management', function () {
+    Route::get('', function () {
         return view('dashboard.laravel-examples.user-management');
-    })->name('user-management');
+    })->name('Users.user-management');
 
     Route::get('user-profile', function () {
         return view('dashboard.laravel-examples.user-profile');
     })->name('user-profile');
 });
-
-
-Route::resource('/dashboard/categories', CreatorCategoryController::class)->except('show')
-    ->middleware('admin:1')
-    ->names([
-        'index' => 'category-dashboard',
-        'create' => 'category-create',
-        'edit' => 'category-edit',
-        'update' => 'category-edit',
-        'destroy' => 'category-delete'
-    ])->except('show');;

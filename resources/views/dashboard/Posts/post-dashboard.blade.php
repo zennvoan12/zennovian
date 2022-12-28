@@ -80,14 +80,16 @@
                                                         class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
-                                                    <form action="{{ route('post-show', ['post' => $post->slug]) }}"
-                                                        method="POST" class="d-inline" id="deleteForm">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button type="button" class="badge bg-danger border-0"><i
-                                                                class="material-icons opacity-10"
-                                                                onclick=" confirmDelete()">cancel</i></button>
-                                                    </form>
+                                                    @can('admin',$user)
+                                                        <form action="{{ route('post-show', ['post' => $post->slug]) }}"
+                                                            method="POST" class="d-inline" id="deleteForm">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button type="button" class="badge bg-danger border-0"><i
+                                                                    class="material-icons opacity-10"
+                                                                    onclick=" confirmDelete()">cancel</i></button>
+                                                        </form>
+                                                    @endcan
 
                                                 </td>
                                             </tr>

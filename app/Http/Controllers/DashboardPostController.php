@@ -17,8 +17,9 @@ class DashboardPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $posts)
+    public function index(Post $posts, User $user)
     {
+        $this->authorize('admin', $user);
         $pagination = Post::paginate(10);
         return view('dashboard.Posts.post-dashboard', [
             'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString(),
@@ -196,8 +197,9 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post, User $user)
     {
+        $this->authorize('admin', $user);
         if ($post->image) {
             Storage::delete($post->image);
         }

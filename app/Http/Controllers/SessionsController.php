@@ -26,7 +26,7 @@ class SessionsController extends Controller
 
         if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
-                'email' => 'Login Failed'
+                'email' => 'Not Verified'
             ]);
         }
 

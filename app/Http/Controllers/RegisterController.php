@@ -21,11 +21,11 @@ class RegisterController extends Controller
                 'name' => 'required|max:255',
                 'username' => 'required|min:5|max:15|unique:users',
                 'email' => 'required|email:dns|max:255|unique:users,email',
-                'password' => 'required|min:5|max:255',
+                'password' => 'required|min:8|max:255',
             ],
         );
 
-       
+
         $user = User::create($attributes);
         auth()->login($user);
 

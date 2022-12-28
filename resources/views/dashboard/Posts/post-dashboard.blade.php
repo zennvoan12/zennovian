@@ -94,6 +94,7 @@
                                         @endforeach
 
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -104,20 +105,20 @@
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
+    <script>
+        function deleteConfirmation() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+
+            });
+        }
+    </script>
     <x-plugins></x-plugins>
 
 </x-layout>
-<script>
-    function deleteConfirmation() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true,
-
-        });
-    }
-</script>

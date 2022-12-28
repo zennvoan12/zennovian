@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\Paginator;
 
 class DashboardPostController extends Controller
 {
@@ -60,8 +61,13 @@ class DashboardPostController extends Controller
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
         Post::create($validatedData);
-        
-        return redirect()->route('post-dashboard')->with('success', 'New Post Added');
+
+        $notif = [
+            'message' => 'Data has been Added',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('post-dashboard')->with($notif);
     }
 
     /**
@@ -174,8 +180,13 @@ class DashboardPostController extends Controller
         // Update post dengan data yang telah divalidasi
         Post::where('id', $post->id)->update($validatedData);
 
+        $notif = [
+            'message' => 'Data has been Updated',
+            'alert-type' => 'success'
+        ];
+
         // Kembali ke halaman post dashboard dengan pesan sukses
-        return redirect()->route('post-dashboard')->with('success', 'Post has been Updated');
+        return redirect()->route('post-dashboard')->with($notif);
     }
 
     /**
@@ -191,7 +202,11 @@ class DashboardPostController extends Controller
         }
 
         $post->delete();
-        return redirect()->route('post-dashboard')->with('success', 'Post has been Deleted');
+        $notif = [
+            'message' => 'Data has been Deleted',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('post-dashboard')->with($notif);
     }
 
     public function checkSlug(Request $request)

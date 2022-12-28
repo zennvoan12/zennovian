@@ -39,8 +39,10 @@
 
     {{ $slot }}
     {{-- sweetalert lib --}}
-    <script src="{{ mix('resources/js/app.js') }}"></script>
-    <link rel="stylesheet" href="{{ mix('resources/scss/app.scss') }}">
+    <link rel="stylesheet" href="{{ asset('assets/@sweetalert2/theme-material-ui/material-ui.css') }}">
+    <script src="{{ asset('assets/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
     <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
@@ -57,13 +59,73 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
 
-        Swal.fire('Any fool can use a computer');
 
 
-        // const Toast = Swal.mixin({
-        //     toast:true,
-        //     position:
-        // })
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            html: 'It Will Closed',
+            timer: 10000,
+
+        })
+
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type') }}";
+            switch (type) {
+                case 'info':
+                    Toast.fire({
+                        type: 'info',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'success':
+                    Toast.fire({
+                        type: 'success',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'warning':
+                    Toast.fire({
+                        type: 'warning',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'error':
+                    Toast.fire({
+                        type: 'error',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'dialog_error':
+                    Toast.fire({
+                        type: 'warning',
+                        title: "Something Wrong !!",
+                        text: "{{ Session::get('message') }}",
+                        timer: 10000,
+                    })
+                    break;
+
+
+
+            }
+        @endif
+
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: "Oppst Something Wrong",
+                text: "Try Check Again !"
+            })
+        @endif
+
+
+
+        let baseurl = "<?= url('/') ?>";
+        let fullURL = "<?= url()->full() ?>";
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

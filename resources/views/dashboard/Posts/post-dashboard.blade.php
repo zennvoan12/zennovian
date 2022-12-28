@@ -7,11 +7,7 @@
         <div class="container-fluid py-4">
             <div class="row">
                 <!-- End Navbar -->
-                @if (session()->has('success'))
-                    <div class="alert alert-success col-12 text-white center" role="alert">
-                        {{ session('success') }}
-                    </div>
-                @endif
+
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -22,7 +18,7 @@
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <a href="{{ route('post-create') }}" class="btn btn-primary mx-4">Create New Post</a>
-                                <table class="table align-items-center mb-0">
+                                <table class="table align-items-center mb-0" id="table-data">
                                     <thead>
                                         <tr>
                                             <th
@@ -88,9 +84,9 @@
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
-                                                        <button class="badge bg-danger border-0"><i
+                                                        <button type="button" class="badge bg-danger border-0"><i
                                                                 class="material-icons opacity-10"
-                                                                onclick="return confirm('Are You Sure ?')">cancel</i></button>
+                                                                onclick="deleteConfirmation()">cancel</i></button>
                                                     </form>
 
                                                 </td>
@@ -98,6 +94,7 @@
                                         @endforeach
 
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -108,6 +105,20 @@
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
+    <script>
+        function deleteConfirmation() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+
+            });
+        }
+    </script>
     <x-plugins></x-plugins>
 
 </x-layout>

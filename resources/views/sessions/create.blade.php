@@ -58,16 +58,13 @@
                                     @endif
                                     <div class="input-group input-group-outline mt-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email"
-                                            class="form-control @error('email') is-invalid
-                                        @enderror"
-                                            name="email" autofocus>
+                                        <input type="email" class="form-control" name="email" autofocus>
                                     </div>
-                                    @error('email')
+                                    {{-- @error('email')
                                         <div class="is-invalid">
                                             {{ $message }}
                                         </div>
-                                    @enderror
+                                    @enderror --}}
                                     <div class="input-group input-group-outline mt-3">
                                         <label class="form-label">Password</label>
                                         <input type="password" class="form-control" name="password">

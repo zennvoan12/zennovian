@@ -184,8 +184,8 @@
                                     <ul class="list-group">
                                         <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
                                             <div class="avatar me-3">
-                                                <img src="{{ asset('assets') }}/img/kal-visuals-square.jpg" alt="kal"
-                                                    class="border-radius-lg shadow">
+                                                <img src="{{ asset('assets') }}/img/kal-visuals-square.jpg"
+                                                    alt="kal" class="border-radius-lg shadow">
                                             </div>
                                             <div class="d-flex align-items-start flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Sophie B.</h6>
@@ -271,7 +271,8 @@
                                                 As Uber works through a huge amount of internal management turmoil.
                                             </p>
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <button type="button" class="btn btn-outline-primary btn-sm mb-0">View
+                                                <button type="button"
+                                                    class="btn btn-outline-primary btn-sm mb-0">View
                                                     Project</button>
                                                 <div class="avatar-group mt-2">
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
@@ -323,7 +324,8 @@
                                                 opinion about.
                                             </p>
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <button type="button" class="btn btn-outline-primary btn-sm mb-0">View
+                                                <button type="button"
+                                                    class="btn btn-outline-primary btn-sm mb-0">View
                                                     Project</button>
                                                 <div class="avatar-group mt-2">
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
@@ -374,7 +376,8 @@
                                                 Different people have different taste, and various types of music.
                                             </p>
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <button type="button" class="btn btn-outline-primary btn-sm mb-0">View
+                                                <button type="button"
+                                                    class="btn btn-outline-primary btn-sm mb-0">View
                                                     Project</button>
                                                 <div class="avatar-group mt-2">
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
@@ -426,7 +429,8 @@
                                                 color.
                                             </p>
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <button type="button" class="btn btn-outline-primary btn-sm mb-0">View
+                                                <button type="button"
+                                                    class="btn btn-outline-primary btn-sm mb-0">View
                                                     Project</button>
                                                 <div class="avatar-group mt-2">
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"

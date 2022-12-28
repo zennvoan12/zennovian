@@ -24,15 +24,16 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
+
         if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
-                'email' => 'Login Failed'
+                'email' => ['alert-type' => 'error']
             ]);
         }
 
         session()->regenerate();
 
-        return redirect()->intended('/dashboard');
+        return redirect()->intended('/dashboard')->with(['message' => 'Berhasil Masuk', 'alert-type' => 'success']);
     }
 
     public function show()

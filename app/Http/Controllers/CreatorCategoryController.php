@@ -54,7 +54,7 @@ class CreatorCategoryController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('index')->with($notif);
+        return redirect()->route('category-dashboard')->with($notif);
     }
 
     /**
@@ -129,7 +129,7 @@ class CreatorCategoryController extends Controller
             'message' => 'Data has been Deleted',
             'alert-type' => 'success'
         ];
-        return redirect()->route('categories.destroy')->with($notif);
+        return redirect()->route('category-dashboard')->with($notif);
     }
 
 

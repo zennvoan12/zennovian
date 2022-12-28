@@ -83,8 +83,6 @@ Route::group(['middleware' => 'auth'], function () {
         'edit' => 'post-edit',
         'destroy' => 'post-delete',
         'update' => 'post-edit'
-    ])->only([
-        'index', 'show', 'create', 'edit', 'store', 'destroy', 'update'
     ]);
 
     // Route::controller(DashboardPostController::class)->group(function () {

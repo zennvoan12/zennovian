@@ -7,11 +7,7 @@
         <div class="container-fluid py-4">
             <div class="row">
                 <!-- End Navbar -->
-                @if (session()->has('success'))
-                    <div class="alert alert-success col-12 text-white center" role="alert">
-                        {{ session('success') }}
-                    </div>
-                @endif
+
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -72,12 +68,12 @@
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
                                                     <form action="categories/{{ $category->slug }}" method="POST"
-                                                        class="d-inline">
+                                                        class="d-inline" id="deleteForm">
                                                         @method('delete')
                                                         @csrf
-                                                        <button class="badge bg-danger border-0"><i
+                                                        <button type="button" class="badge bg-danger border-0"><i
                                                                 class="material-icons opacity-10"
-                                                                onclick="return confirm('Are You Sure ?')">cancel</i></button>
+                                                                onclick=" confirmDelete()">cancel</i></button>
                                                     </form>
 
                                                 </td>
@@ -96,5 +92,43 @@
         </div>
     </main>
     <x-plugins></x-plugins>
+    <script>
+        function confirmDelete() {
+            Swal.fire({
+                title: 'Are you sure you want to delete this data?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
 
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        title: 'Deleting data...',
+                        text: 'Please wait',
+                        timer: 2000,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                            timerInterval = setInterval(() => {
+                                Swal.getContent().querySelector('strong')
+                                    .textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        onClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your data has been deleted.',
+                                'success'
+                            )
+                            document.getElementById('deleteForm').submit();
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 </x-layout>

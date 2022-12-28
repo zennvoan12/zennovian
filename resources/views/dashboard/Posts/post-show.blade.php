@@ -32,7 +32,7 @@
                                     <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn btn-danger "><i class="material-icons opacity-10"
+                                        <button type="" class="btn btn-danger "><i class="material-icons opacity-10"
                                                 onclick="return confirm('Are You Sure ?')">cancel</i> Delete</button>
                                     </form>
 

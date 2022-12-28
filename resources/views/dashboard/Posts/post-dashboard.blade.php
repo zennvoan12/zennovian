@@ -18,7 +18,7 @@
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <a href="{{ route('post-create') }}" class="btn btn-primary mx-4">Create New Post</a>
-                                <table class="table align-items-center mb-0" id="table-data">
+                                <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
                                             <th
@@ -80,13 +80,13 @@
                                                         class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
-                                                    <form action="posts/{{ $post->slug }}" method="POST"
-                                                        class="d-inline">
-                                                        @method('delete')
+                                                    <form action="{{ route('post-show', ['post' => $post->slug]) }}"
+                                                        method="POST" class="d-inline" id="deleteForm">
+                                                        @method('DELETE')
                                                         @csrf
                                                         <button type="button" class="badge bg-danger border-0"><i
                                                                 class="material-icons opacity-10"
-                                                                onclick="deleteConfirmation()">cancel</i></button>
+                                                                onclick=" confirmDelete()">cancel</i></button>
                                                     </form>
 
                                                 </td>
@@ -94,7 +94,6 @@
                                         @endforeach
 
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
@@ -105,20 +104,82 @@
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
+    <x-plugins></x-plugins>
+
     <script>
-        function deleteConfirmation() {
+        // function confirm() {
+        //     Swal.mixin({
+        //         customClass: {
+        //             confirmButton: 'btn btn-success',
+        //             cancelButton: 'btn btn-danger'
+        //         },
+        //         buttonsStyling: false
+        //     })
+        //     Swal.fire({
+        //         title: 'Are you sure?',
+        //         text: "You won't be able to revert this!",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Yes, delete it!',
+        //         cancelButtonText: 'No, cancel!',
+        //         reverseButtons: true,
+        //         timer: 5000
+
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             Swal.fire(
+        //                 'Deleted!',
+        //                 'Your file has been deleted.',
+        //                 'success'
+        //             )
+        //         } else if (
+        //             /* Read more about handling dismissals below */
+        //             result.dismiss === Swal.DismissReason.cancel
+        //         ) {
+        //             Swal.fire(
+        //                 'Cancelled',
+        //                 'Your imaginary file is safe :)',
+        //                 'error'
+        //             )
+        //         }
+        //     });
+        // }
+        function confirmDelete() {
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Are you sure you want to delete this data?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true,
 
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        title: 'Deleting data...',
+                        text: 'Please wait',
+                        timer: 2000,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                            timerInterval = setInterval(() => {
+                                Swal.getContent().querySelector('strong')
+                                    .textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        onClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your data has been deleted.',
+                                'success'
+                            )
+                            document.getElementById('deleteForm').submit();
+                        }
+                    });
+                }
             });
         }
     </script>
-    <x-plugins></x-plugins>
-
 </x-layout>

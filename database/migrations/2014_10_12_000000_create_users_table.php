@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('location')->nullable();
             $table->string('photo',)->nullable();
-            $table->string('role')->default('user');
+            $table->string('roles')->default('user');
             $table->text('about')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();

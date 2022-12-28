@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreatorCategoryController;
 use App\Http\Controllers\PostController;

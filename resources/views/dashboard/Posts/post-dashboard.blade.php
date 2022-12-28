@@ -95,12 +95,17 @@
 
                                     </tbody>
                                 </table>
+                                <nav class=" d-lg-flex justify-content-center mt-5">
+
+                                    {{ $posts->links() }}
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+
+            </div>
             <x-footers.auth></x-footers.auth>
         </div>
     </main>

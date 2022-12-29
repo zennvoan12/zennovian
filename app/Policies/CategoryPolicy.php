@@ -18,7 +18,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->roles === 'admin') {
+        if ($user->role === 'admin') {
             return true;
         }
 

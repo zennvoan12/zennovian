@@ -80,9 +80,10 @@
                                                         class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
-                                                    <form action="{{ route('post-show', ['post' => $post->slug]) }}"
+                                                    <form action="{{ route('post-delete', ['post' => $post]) }}"
                                                         method="POST" class="d-inline" id="deleteForm">
                                                         @method('DELETE')
+                                                        {{ csrf_field() }}
                                                         @csrf
                                                         <button type="button" class="badge bg-danger border-0"><i
                                                                 class="material-icons opacity-10"
@@ -111,79 +112,30 @@
     <x-plugins></x-plugins>
 
     <script>
-        // function confirm() {
-        //     Swal.mixin({
-        //         customClass: {
-        //             confirmButton: 'btn btn-success',
-        //             cancelButton: 'btn btn-danger'
-        //         },
-        //         buttonsStyling: false
-        //     })
-        //     Swal.fire({
-        //         title: 'Are you sure?',
-        //         text: "You won't be able to revert this!",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes, delete it!',
-        //         cancelButtonText: 'No, cancel!',
-        //         reverseButtons: true,
-        //         timer: 5000
-
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             Swal.fire(
-        //                 'Deleted!',
-        //                 'Your file has been deleted.',
-        //                 'success'
-        //             )
-        //         } else if (
-        //             /* Read more about handling dismissals below */
-        //             result.dismiss === Swal.DismissReason.cancel
-        //         ) {
-        //             Swal.fire(
-        //                 'Cancelled',
-        //                 'Your imaginary file is safe :)',
-        //                 'error'
-        //             )
-        //         }
-        //     });
-        // }
         function confirmDelete() {
             Swal.fire({
-                title: 'Are you sure you want to delete this data?',
+                title: 'Are you sure?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
-
+                reverseButtons: false,
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.value) {
-                    Swal.fire({
-                        title: 'Deleting data...',
-                        text: 'Please wait',
-                        timer: 2000,
-                        onBeforeOpen: () => {
-                            Swal.showLoading()
-                            timerInterval = setInterval(() => {
-                                Swal.getContent().querySelector('strong')
-                                    .textContent = Swal.getTimerLeft()
-                            }, 100)
-                        },
-                        onClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                    }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            Swal.fire(
-                                'Deleted!',
-                                'Your data has been deleted.',
-                                'success'
-                            )
-                            document.getElementById('deleteForm').submit();
-                        }
-                    });
+                    // Validasi form
+                    if (document.getElementById('deleteForm').checkValidity()) {
+                        // Kirim form jika valid
+                        document.getElementById('deleteForm').submit();
+                    } else {
+                        // Tampilkan pesan error jika form tidak valid
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        });
+                    }
                 }
-            });
+            })
         }
     </script>
 </x-layout>

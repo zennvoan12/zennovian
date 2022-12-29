@@ -120,7 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::resource('/dashboard/categories', CreatorCategoryController::class)->except('show')
+Route::resource('/dashboard/categories', CreatorCategoryController::class)
     ->middleware('admin:admin')
     ->names([
         'index' => 'category-dashboard',
@@ -128,4 +128,4 @@ Route::resource('/dashboard/categories', CreatorCategoryController::class)->exce
         'edit' => 'category-edit',
         'update' => 'category-edit',
         'destroy' => 'category-delete'
-    ])->except('show');;
+    ])->except('show');

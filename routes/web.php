@@ -121,7 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::resource('/dashboard/categories', CreatorCategoryController::class)->except('show')
-    ->middleware('admin:1')
+    ->middleware('admin:admin')
     ->names([
         'index' => 'category-dashboard',
         'create' => 'category-create',

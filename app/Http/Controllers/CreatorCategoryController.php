@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 
 class CreatorCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('admin:viewAny,CategoryPolicy');
+    }
+
+
+
     public function index()
     {
         return view('dashboard.Categories.category-dashboard', [

@@ -26,7 +26,7 @@ class isAdmin
         }
 
         // Cek apakah user telah login dan username-nya sesuai dengan yang ditentukan
-        if (!auth()->check() || auth()->user()->roles !== 1) {
+        if (!auth()->check() || auth()->user()->roles !== 'admin') {
             // Tangani kondisi di mana akses ditolak dengan menggunakan HTTP Exception
             throw new HttpException(403, 'Akses ditolak');
         }

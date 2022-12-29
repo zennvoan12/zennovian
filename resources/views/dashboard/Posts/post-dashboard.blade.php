@@ -95,6 +95,10 @@
 
                                     </tbody>
                                 </table>
+                                <div class=" d-lg-flex justify-content-center mt-5">
+
+                                    {{ $posts->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>

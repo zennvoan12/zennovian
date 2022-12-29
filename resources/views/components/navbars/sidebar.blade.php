@@ -87,7 +87,9 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
-            @can('admin')
+
+
+            @can('viewAny', 'App\Models\Category')
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Creator</h6>
                 </li>

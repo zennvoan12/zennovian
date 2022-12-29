@@ -11,11 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+
     public function index(Post $posts)
     {
         return view('dashboard.Posts.post-dashboard', [
@@ -200,11 +198,12 @@ class DashboardPostController extends Controller
         }
 
         $post->delete();
+
         $notif = [
             'message' => 'Data has been Deleted',
             'alert-type' => 'success'
         ];
-        return redirect()->route('post-dashboard')->with($notif);
+        return redirect('/dashboard/posts')->with($notif);
     }
 
     public function checkSlug(Request $request)

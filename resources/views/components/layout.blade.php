@@ -43,6 +43,8 @@
     <script src="{{ asset('assets/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
     <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>

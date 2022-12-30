@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0" href="{{ route('user-management.create') }}"><i
+                            <a class="btn bg-gradient-dark mb-0" href="{{ route('user-management-create') }}"><i
                                     class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
                                 User</a>
                         </div>
@@ -95,7 +95,8 @@
                                                         class="text-secondary text-xs font-weight-bold">{{ $user->updated_at->diffForHumans() }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a rel="tooltip" class="btn btn-success btn-link" href=""
+                                                    <a rel="tooltip" class="btn btn-success btn-link"
+                                                        href="{{ route('user-management-edit', $user->username) }}"
                                                         data-original-title="" title="">
                                                         <i class="material-icons">edit</i>
                                                         <div class="ripple-container"></div>
@@ -111,6 +112,10 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class=" d-lg-flex justify-content-center mt-5">
+
+                                    {{ $users->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -96,10 +96,15 @@ Route::group(['middleware' => 'auth'], function () {
             'destroy' => 'category-delete'
         ])->except('show');
 
-    Route::resource('/dashboard/user-management', UserManagementController::class)
-        ->middleware('creator')
-        ->names([
-            'index' => 'index',
+    Route::resource('/dashboard/users', UserManagementController::class)
+        ->middleware('creator')->names([
+            'index' => 'user-management',
+            'create' => 'user-management-create',
+            'store' => 'user-management-store',
+            'show' => 'user-management-show',
+            'edit' => 'user-management-edit',
+            'update' => 'user-management-update',
+            'destroy' => 'user-management-delete'
         ]);
 
     Route::get('virtual-reality', function () {

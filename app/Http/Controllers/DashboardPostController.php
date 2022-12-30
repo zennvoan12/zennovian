@@ -174,7 +174,7 @@ class DashboardPostController extends Controller
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
         // Update post dengan data yang telah divalidasi
-        Post::where('id', $post->id)->update($validatedData);
+        Post::where('username', $post->username)->update($validatedData);
 
         $notif = [
             'message' => 'Data has been Updated',

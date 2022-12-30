@@ -177,7 +177,7 @@
         const previewImage = () => {
             const {
                 files
-            } = document.querySelector('#image');
+            } = document.querySelector('#photo');
             const imgPreview = document.querySelector('.img-preview');
 
             imgPreview.style.display = 'block';

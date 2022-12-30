@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Storage;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class UserManagementController extends Controller
 {
@@ -14,8 +17,9 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        return view('dashboard.Management.index', [
-            'users' => User::all()
+        $users = User::query()->paginate(5);
+        return view('dashboard.Management.user-management', [
+            'users' => $users
         ]);
     }
 
@@ -92,7 +96,10 @@ class UserManagementController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('dashboard.Management.user-management-edit', [
+            'user' => $user,
+            'users' => User::get()
+        ]);
     }
 
     /**
@@ -104,7 +111,34 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users',
+            'username' => 'required|min:5|max:15|unique:users',
+            'phone' => 'required|max:15',
+            'photo' => 'image|file|max:2000',
+            'role' => 'required',
+            'password' => 'required|min:8|max:255'
+        ]);
+
+        if ($request->username !=  $user->username) {
+            $validatedData['username'] = 'required|min:5|max:15|unique:users';
+        }
+        if ($request->file('photo')) {
+            if ($request->oldPhoto) {
+                Storage::delete($request->oldPhoto);
+            }
+            $validatedData['photo'] = $request->file('photo')->store('user-photos', 'public');
+        }
+
+        User::where('id', $user->id)->update($validatedData);
+        $notif = [
+            'message' => 'User has been Updated',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('user-management.index')->with($notif);
     }
 
     /**
@@ -117,5 +151,13 @@ class UserManagementController extends Controller
     {
         //
 
+    }
+
+    public function checkUsername(Request $request)
+    {
+
+        $slug = SlugService::createSlug(Post::class, 'username', $request->username);
+
+        return response()->json(['slug' => $slug]);
     }
 }

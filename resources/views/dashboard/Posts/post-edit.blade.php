@@ -129,7 +129,8 @@
                                                                 <img src="{{ asset('storage/' . $post->image) }}"
                                                                     class="img-preview img-fluid mb-3 col-sm-5 d-block">
                                                             @else
-                                                                <img class="img-preview img-fluid mb-3 col-sm-5">
+                                                                <img src="https://source.unsplash.com/80x60?user"
+                                                                    class="img-preview img-fluid mb-3 col-sm-5">
                                                             @endif
                                                             <input
                                                                 class="form-control @error('image') is-invalid @enderror"

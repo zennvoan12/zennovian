@@ -10,6 +10,10 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class UserManagementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('creator:viewAny,CreatorPolicy');
+    }
     /**
      * Display a listing of the resource.
      *

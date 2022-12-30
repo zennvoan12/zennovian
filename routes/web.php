@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
     Route::resource('/dashboard/categories', CreatorCategoryController::class)
-        ->middleware('admin:admin')
+        ->middleware('admin:admin')->middleware('creator:viewAny,CategoryPolicy')
         ->names([
             'index' => 'category-dashboard',
             'create' => 'category-create',
@@ -97,7 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
         ])->except('show');
 
     Route::resource('/dashboard/users', UserManagementController::class)
-        ->middleware('creator')->names([
+        ->middleware('creator:creator')->names([
             'index' => 'user-management',
             'create' => 'user-management-create',
             'store' => 'user-management-store',

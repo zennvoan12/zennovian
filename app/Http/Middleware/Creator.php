@@ -18,15 +18,21 @@ class Creator
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, $username)
     {
-        if (Auth::guard($guard)->guest()) {
-            return redirect()->guest('login');
+        // Validasi parameter $username
+        if (!is_string($username) || empty(trim($username))) {
+            throw new \InvalidArgumentException('Parameter $username tidak valid');
         }
 
-        if (Auth::user()->role !== 'creator') {
+        // Cek apakah user telah login dan username-nya sesuai dengan yang ditentukan
+        if (!auth()->check() || auth()->user()->role !== 'creator') {
+            // Tangani kondisi di mana akses ditolak dengan menggunakan HTTP Exception
             throw new HttpException(403, 'Akses ditolak');
         }
+
+        // Catat log akses yang ditolak
+        Log::warning('Akses ditolak untuk user: ' . auth()->user()->username);
 
         return $next($request);
     }

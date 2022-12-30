@@ -11,6 +11,7 @@ class CreatorCategoryController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('creator:viewAny,CategoryPolicy');
         $this->middleware('admin:viewAny,CategoryPolicy');
     }
 

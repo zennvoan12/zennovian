@@ -15,7 +15,7 @@
                         </div>
 
                         <div class="p-4 ">
-                            <form method="POST" action="{{ route('index') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('user-management') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-8">

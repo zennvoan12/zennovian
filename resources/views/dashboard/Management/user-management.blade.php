@@ -95,18 +95,25 @@
                                                         class="text-secondary text-xs font-weight-bold">{{ $user->updated_at->diffForHumans() }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a rel="tooltip" class="btn btn-success btn-link"
+                                                    <a rel="tooltip" class="badge btn-success btn-link"
                                                         href="{{ route('user-management-edit', $user->username) }}"
                                                         data-original-title="" title="">
                                                         <i class="material-icons">edit</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
+                                                    <form
+                                                        action="{{ route('user-management-delete', $user->username) }}"
+                                                        method="POST" class="d-inline" id="deleteForm">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="badge bg-danger border-0 "
+                                                            onclick=" confirmDelete('{{ $user->username }}')"
+                                                            data-slug="{{ $user->username }}"><i
+                                                                class="material-icons">close</i>
+                                                            <div class="ripple-container"></div>
+                                                        </button>
+                                                    </form>
 
-                                                    <button type="button" class="btn btn-danger btn-link"
-                                                        data-original-title="" title="">
-                                                        <i class="material-icons">close</i>
-                                                        <div class="ripple-container"></div>
-                                                    </button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -125,5 +132,20 @@
         </div>
     </main>
     <x-plugins></x-plugins>
+    <script>
+        function confirmDelete(username) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
 
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('deleteForm').submit();
+                }
+            })
+        }
+    </script>
 </x-layout>

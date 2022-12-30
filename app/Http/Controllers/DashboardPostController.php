@@ -193,6 +193,7 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post = Post::where('id', $post->id)->firstOrFail();
         if ($post->image) {
             Storage::delete($post->image);
         }

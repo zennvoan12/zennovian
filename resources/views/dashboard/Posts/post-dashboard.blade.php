@@ -86,7 +86,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="badge bg-danger border-0"
-                                                            onclick=" confirmDelete('{{ $post->slug }}')"
+                                                            onclick="return confirmDelete('{{ $post->slug }}')"
                                                             data-slug="{{ $post->slug }}"><i
                                                                 class="material-icons opacity-10">cancel</i></button>
                                                     </form>
@@ -114,30 +114,15 @@
 
     <script>
         function confirmDelete(slug) {
-            swal.fire({
-                title: "Delete ?",
-                text: "Are you Sure ?",
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: "Yes, Do it",
-                cancelButtonText: "No ! ",
-                reverseButtons: true,
-                timer: 5000
-            }).then(function(result) {
-                if (result.value) {
-                    axios.delete('{{ route('post-delete', $post->slug) }}')
-                        .then(response => {
-                            // Berhasil menghapus data, tampilkan notifikasi dan refresh halaman
-                            swal.fire("Done!", "Data has been Deleted", "success");
-                            setTimeout(() => {
-                                location.reload();
-                            }, 1000);
-                        })
-                        .catch(error => {
-                            // Gagal menghapus data, tampilkan pesan error
-                            swal.fire("Error!", error.response.data.message, "error");
-                        });
-                }
-            });
+
+                confirmButtonText: 'Yes, delete it!'
+            })
+
         }
     </script>
 </x-layout>

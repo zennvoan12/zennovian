@@ -30,7 +30,7 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        return view('dashboard.Management.create', [
+        return view('dashboard.Management.user-management-create', [
             'users' => User::all()
         ]);
     }
@@ -58,6 +58,9 @@ class UserManagementController extends Controller
 
             $validatedData['photo'] = $request->file('photo')->store('user-photos', 'public');
         }
+        if (Storage::exists($validatedData['photo'])) {
+            Storage::delete($validatedData['photo']);
+        }
 
         $user = new User;
         $user->name = $validatedData['name'];
@@ -74,7 +77,7 @@ class UserManagementController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('index')->with($notif);
+        return redirect()->route('dashboard.Management.user-management')->with($notif);
     }
 
     /**
@@ -149,8 +152,22 @@ class UserManagementController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (!Storage::exists($user->photo)) {
+            $user->delete();
+        }
 
+        if ($user->photo) {
+            Storage::delete($user->photo);
+        }
+
+
+        $user->delete();
+
+        $notif = [
+            'message' => 'Data has been Deleted',
+            'alert-type' => 'success'
+        ];
+        return redirect('dashboard/users')->with($notif);
     }
 
     public function checkUsername(Request $request)

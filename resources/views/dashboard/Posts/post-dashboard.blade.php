@@ -76,17 +76,19 @@
                                                         class="badge bg-info">
                                                         <i class="material-icons opacity-10">visibility</i>
                                                     </a>
-                                                    <a href="{{ route('post-show', ['post' => $post]) }}/edit"
+                                                    {{-- @dd($post-slug) --}}
+                                                    <a href="{{ route('post-show', $post->slug) }}/edit"
                                                         class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
-                                                    <form action="{{ route('post-show', ['post' => $post->slug]) }}"
+                                                    <form action="{{ route('post-delete', $post->slug) }}"
                                                         method="POST" class="d-inline" id="deleteForm">
-                                                        @method('DELETE')
                                                         @csrf
-                                                        <button type="button" class="badge bg-danger border-0"><i
-                                                                class="material-icons opacity-10"
-                                                                onclick=" confirmDelete()">cancel</i></button>
+                                                        @method('DELETE')
+                                                        <button type="submit" class="badge bg-danger border-0"
+                                                            onclick=" confirmDelete('{{ $post->slug }}')"
+                                                            data-slug="{{ $post->slug }}"><i
+                                                                class="material-icons opacity-10">cancel</i></button>
                                                     </form>
 
                                                 </td>
@@ -95,6 +97,10 @@
 
                                     </tbody>
                                 </table>
+                                <div class=" d-lg-flex justify-content-center mt-5">
+
+                                    {{ $posts->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,77 +113,29 @@
     <x-plugins></x-plugins>
 
     <script>
-        // function confirm() {
-        //     Swal.mixin({
-        //         customClass: {
-        //             confirmButton: 'btn btn-success',
-        //             cancelButton: 'btn btn-danger'
-        //         },
-        //         buttonsStyling: false
-        //     })
-        //     Swal.fire({
-        //         title: 'Are you sure?',
-        //         text: "You won't be able to revert this!",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes, delete it!',
-        //         cancelButtonText: 'No, cancel!',
-        //         reverseButtons: true,
-        //         timer: 5000
-
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             Swal.fire(
-        //                 'Deleted!',
-        //                 'Your file has been deleted.',
-        //                 'success'
-        //             )
-        //         } else if (
-        //             /* Read more about handling dismissals below */
-        //             result.dismiss === Swal.DismissReason.cancel
-        //         ) {
-        //             Swal.fire(
-        //                 'Cancelled',
-        //                 'Your imaginary file is safe :)',
-        //                 'error'
-        //             )
-        //         }
-        //     });
-        // }
-        function confirmDelete() {
-            Swal.fire({
-                title: 'Are you sure you want to delete this data?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
+        function confirmDelete(slug) {
+            swal.fire({
+                title: "Delete ?",
+                text: "Are you Sure ?",
                 showCancelButton: true,
-
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
+                confirmButtonText: "Yes, Do it",
+                cancelButtonText: "No ! ",
+                reverseButtons: true,
+                timer: 5000
+            }).then(function(result) {
                 if (result.value) {
-                    Swal.fire({
-                        title: 'Deleting data...',
-                        text: 'Please wait',
-                        timer: 2000,
-                        onBeforeOpen: () => {
-                            Swal.showLoading()
-                            timerInterval = setInterval(() => {
-                                Swal.getContent().querySelector('strong')
-                                    .textContent = Swal.getTimerLeft()
-                            }, 100)
-                        },
-                        onClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                    }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            Swal.fire(
-                                'Deleted!',
-                                'Your data has been deleted.',
-                                'success'
-                            )
-                            document.getElementById('deleteForm').submit();
-                        }
-                    });
+                    axios.delete('{{ route('post-delete', $post->slug) }}')
+                        .then(response => {
+                            // Berhasil menghapus data, tampilkan notifikasi dan refresh halaman
+                            swal.fire("Done!", "Data has been Deleted", "success");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        })
+                        .catch(error => {
+                            // Gagal menghapus data, tampilkan pesan error
+                            swal.fire("Error!", error.response.data.message, "error");
+                        });
                 }
             });
         }

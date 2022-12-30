@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\User;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -12,15 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+
     public function index(Post $posts)
     {
         return view('dashboard.Posts.post-dashboard', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+            'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString()
         ]);
     }
 
@@ -201,11 +198,12 @@ class DashboardPostController extends Controller
         }
 
         $post->delete();
+
         $notif = [
             'message' => 'Data has been Deleted',
             'alert-type' => 'success'
         ];
-        return redirect()->route('post-dashboard')->with($notif);
+        return redirect('/dashboard/posts')->with($notif);
     }
 
     public function checkSlug(Request $request)

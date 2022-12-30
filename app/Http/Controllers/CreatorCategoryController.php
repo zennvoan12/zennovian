@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 
 class CreatorCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('admin:viewAny,CategoryPolicy');
+    }
+
+
+
     public function index()
     {
         return view('dashboard.Categories.category-dashboard', [
@@ -136,7 +138,7 @@ class CreatorCategoryController extends Controller
     public function checkSlug(Request $request)
     {
 
-        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->name);
 
         return response()->json(['slug' => $slug]);
     }

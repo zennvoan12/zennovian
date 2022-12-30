@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,12 @@ Route::group(['middleware' => 'auth'], function () {
             'destroy' => 'category-delete'
         ])->except('show');
 
+    Route::resource('/dashboard/user-management', UserManagementController::class)
+        ->middleware('creator')
+        ->names([
+            'index' => 'index',
+        ]);
+
     Route::get('virtual-reality', function () {
         return view('dashboard.virtual-reality');
     })->name('virtual-reality');
@@ -111,9 +118,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard.static-sign-up');
     })->name('static-sign-up');
 
-    Route::get('user-management', function () {
-        return view('dashboard.laravel-examples.user-management');
-    })->name('user-management');
+
 
     Route::get('user-profile', function () {
         return view('dashboard.laravel-examples.user-profile');

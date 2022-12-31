@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/loader.js') }}"></script>
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/variables.css') }}" rel="stylesheet">
+
+
+
 </head>
 
 <body>
@@ -44,10 +49,12 @@
     <script src="{{ asset('assets/vendors/wowjs/wow.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/slick-carousel/slick.min.js') }}"></script>
-
+    <script src="{{ asset('assets/vendors/aos/aos.js') }}"></script>
+    <script src="{{ asset('assets/js/glightbox.min.js') }}"></script>
     {{-- script main --}}
     <script src="{{ asset('assets/js/landing.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
     <script>
         new WOW({
             mobile: false

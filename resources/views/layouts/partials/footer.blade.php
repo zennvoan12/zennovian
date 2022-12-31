@@ -1,6 +1,6 @@
 @guest
 
-    <footer class="oleez-footer wow fadeInUp">
+    <footer class="oleez-footer wow fadeInUp mt-2">
         <div class="container">
             <div class="footer-content">
                 <div class="row">

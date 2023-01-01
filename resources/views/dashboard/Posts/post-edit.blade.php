@@ -74,7 +74,7 @@
                                             class="btn btn-success">
                                             <i class="material-icons opacity-10">arrow_back</i>
                                             Back To My Post</a>
-                                        <form method="POST" action="{{ route('post-show', ['post' => $post]) }}"
+                                        <form method="POST" action="{{ route('post-update', ['post' => $post]) }}"
                                             enctype="multipart/form-data">
                                             @method('put')
                                             @csrf
@@ -129,7 +129,8 @@
                                                                 <img src="{{ asset('storage/' . $post->image) }}"
                                                                     class="img-preview img-fluid mb-3 col-sm-5 d-block">
                                                             @else
-                                                                <img class="img-preview img-fluid mb-3 col-sm-5">
+                                                                <img src="https://source.unsplash.com/80x60?user"
+                                                                    class="img-preview img-fluid mb-3 col-sm-5">
                                                             @endif
                                                             <input
                                                                 class="form-control @error('image') is-invalid @enderror"

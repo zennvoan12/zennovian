@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class User extends Authenticatable
 {
@@ -24,6 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'location',
+        'role',
+        'photo',
         'phone',
         'about',
         'password_confirmation'
@@ -55,5 +59,18 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasMany(Post::class);
+    }
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+    public function sluggable(): array
+
+    {
+        return [
+            'username' => [
+                'source' => 'username'
+            ]
+        ];
     }
 }

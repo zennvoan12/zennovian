@@ -4,12 +4,12 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Access\Gate;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Auth;
 
-class isAdmin
+
+class Creator
 {
     /**
      * Handle an incoming request.
@@ -26,12 +26,10 @@ class isAdmin
         }
 
         // Cek apakah user telah login dan username-nya sesuai dengan yang ditentukan
-        if (!auth()->check() || (!auth()->user()->role === 'admin' && !auth()->user()->role === 'creator')) {
+        if (!auth()->check() || auth()->user()->role !== 'creator') {
             // Tangani kondisi di mana akses ditolak dengan menggunakan HTTP Exception
             throw new HttpException(403, 'Akses ditolak');
         }
-
-
 
         // Catat log akses yang ditolak
         Log::warning('Akses ditolak untuk user: ' . auth()->user()->username);

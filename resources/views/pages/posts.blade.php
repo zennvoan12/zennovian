@@ -21,8 +21,10 @@
                         <h2 class="card-title"><a href="/posts/{{ $posts[0]->slug }}"
                                 class="text-decoration-none text-dark">{{ $posts[0]->title }}</a></h2>
                         <small class="text-muted">
-                            <h6>By : <a class="text-secondary text-decoration-none"
-                                    href="/posts?author={{ $posts[0]->author->username }}">{{ $posts[0]->author->name }}</a>
+                            <h6>By :@if ($posts[0]->author !== null)
+                                    <a href="/posts?author={{ $posts[0]->author->username }}"
+                                        class="text-dark">{{ $posts[0]->author->name }}</a>
+                                @endif
                                 in
                                 <a class="text-decoration-none text-dark"
                                     href="/posts?category={{ $posts[0]->category->slug }}">{{ $posts[0]->category->name }}
@@ -61,8 +63,10 @@
                                         <div class="card-body">
                                             <h4 class="post-title">{{ $post->title }}</h4>
 
-                                            <h6>By : <a href="/posts?author={{ $post->author->username }}"
-                                                    class="text-decoration-none text-dark">{{ $post->author->name }}</a>
+                                            <h6>By : @if ($posts[0]->author !== null)
+                                                    <a href="/posts?author={{ $posts[0]->author->username }}"
+                                                        class="text-dark text-decoration-none">{{ $posts[0]->author->name }}</a>
+                                                @endif
 
                                             </h6>
                                             <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
@@ -97,6 +101,4 @@
 
         {{ $posts->links('vendor.pagination.semantic-ui') }}
     </div>
-
-
 @endsection

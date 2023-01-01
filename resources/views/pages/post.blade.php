@@ -7,7 +7,7 @@
             <h1 class="post-title wow fadeInUp">
                 <h1>{{ $post->$title }}</h1>
                 <div class="row">
-                    <div class="col-md-8 blog-post-wrapper">
+                    <div class="col-lg-14 blog-post-wrapper">
                         <div class="post-header wow fadeInUp">
                             @if ($post->image)
                                 <div style="max-height: 350px; overflow: hidden;">
@@ -22,11 +22,13 @@
 
                         </div>
                         <div class="post-content wow fadeInUp mt-3">
-                            <h6>By : <a href="/authors/{{ $post->author->username }}"
-                                    class="text-decoration-none text-dark">{{ $post->author->name }}</a> In <a
-                                    class="text-decoration-none text-dark"
+                            <h6>By : @if ($post->author !== null)
+                                    <a href="/posts?author={{ $post->author->username }}">{{ $post->author->name }} </a>
+                                @endif In
+                                <a class="text-decoration-none text-dark"
                                     href="/posts?category={{ $post->category->slug }}">{{ $post->category->name }}
-                                </a></h6>
+                                </a>
+                            </h6>
                             <p class="post-date">{{ $post->created_at->diffForHumans() }}</p>
                             <article class="post-content my-3">
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\User;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -12,15 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+
     public function index(Post $posts)
     {
         return view('dashboard.Posts.post-dashboard', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+            'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString()
         ]);
     }
 
@@ -177,7 +174,7 @@ class DashboardPostController extends Controller
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
         // Update post dengan data yang telah divalidasi
-        Post::where('id', $post->id)->update($validatedData);
+        Post::where('username', $post->username)->update($validatedData);
 
         $notif = [
             'message' => 'Data has been Updated',
@@ -196,16 +193,18 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post = Post::where('id', $post->id)->firstOrFail();
         if ($post->image) {
             Storage::delete($post->image);
         }
 
         $post->delete();
+
         $notif = [
             'message' => 'Data has been Deleted',
             'alert-type' => 'success'
         ];
-        return redirect()->route('post-dashboard')->with($notif);
+        return redirect('/dashboard/posts')->with($notif);
     }
 
     public function checkSlug(Request $request)

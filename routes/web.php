@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreatorCategoryController;
 use App\Http\Controllers\PostController;
@@ -8,9 +9,11 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,16 +26,8 @@ use App\Http\Controllers\SessionsController;
 |
 */
 
-Route::get('/', function () {
-    return view('index', [
-        "title" => "Home"
-    ]);
-})->name('home');
-Route::get('/about', function () {
-    return view('pages.about', [
-        'title' => 'About'
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index']);
 
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index')->name('pages.posts');
@@ -42,7 +37,7 @@ Route::controller(PostController::class)->group(function () {
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('pages.posts');
+    Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('pages.category');
 });
 
 
@@ -81,18 +76,30 @@ Route::group(['middleware' => 'auth'], function () {
         'show' => 'post-show',
         'create' => 'post-create',
         'edit' => 'post-edit',
+        'update' => 'post-update',
         'destroy' => 'post-delete',
-        'update' => 'post-edit'
     ]);
 
-    // Route::controller(DashboardPostController::class)->group(function () {
-    //     Route::get('dashboard/posts', [DashboardPostController::class, 'index'])->name('post-dashboard');
-    //     Route::get('dashboard/posts/{post:slug}', [DashboardPostController::class, 'show'])->name('post-show');
-    //     Route::post('dashboard/posts/create', [DashboardPostController::class, 'index'])->name('post-create');
-    //     Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
-    //     // Route::delete('dashboard/posts/{post:id}', [DashboardPostController::class, 'destroy'])->name('post-dashboard')->where('slug', '[\w-]+');
-    //     Route::delete('dashboard/posts/{post:slug}', [DashboardPostController::class, 'destroy'])->name('post-delete')->where('slug', '[\w-]+');
-    // });
+    Route::resource('/dashboard/categories', CreatorCategoryController::class)
+        ->middleware('admin:viewAny,CategoryPolicy')
+        ->names([
+            'index' => 'category-dashboard',
+            'create' => 'category-create',
+            'edit' => 'category-edit',
+            'update' => 'category-update',
+            'destroy' => 'category-delete'
+        ])->except('show');
+
+    Route::resource('/dashboard/users', UserManagementController::class)
+        ->middleware('creator:creator')->names([
+            'index' => 'user-management',
+            'create' => 'user-management-create',
+            'store' => 'user-management-store',
+            'show' => 'user-management-show',
+            'edit' => 'user-management-edit',
+            'update' => 'user-management-update',
+            'destroy' => 'user-management-delete'
+        ]);
 
     Route::get('virtual-reality', function () {
         return view('dashboard.virtual-reality');
@@ -110,22 +117,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard.static-sign-up');
     })->name('static-sign-up');
 
-    Route::get('user-management', function () {
-        return view('dashboard.laravel-examples.user-management');
-    })->name('user-management');
+
 
     Route::get('user-profile', function () {
         return view('dashboard.laravel-examples.user-profile');
     })->name('user-profile');
 });
-
-
-Route::resource('/dashboard/categories', CreatorCategoryController::class)->except('show')
-    ->middleware('admin:1')
-    ->names([
-        'index' => 'category-dashboard',
-        'create' => 'category-create',
-        'edit' => 'category-edit',
-        'update' => 'category-edit',
-        'destroy' => 'category-delete'
-    ])->except('show');;

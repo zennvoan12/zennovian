@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 
 class CreatorCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+
+        $this->middleware('admin:viewAny,CategoryPolicy');
+    }
+
+
+
     public function index()
     {
         return view('dashboard.Categories.category-dashboard', [
@@ -92,10 +95,8 @@ class CreatorCategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $rules = [
-            'title' => 'required|max:255',
-            'category_id' => 'required',
-            'image' => 'image|file|max:2000',
-            'body' => 'required'
+            'name' => 'required|max:255',
+
         ];
         $validatedData = $request->validate($rules);
 
@@ -103,10 +104,8 @@ class CreatorCategoryController extends Controller
             $validatedData['slug'] = 'required|unique:posts';
         }
 
-        if ($category->author->id !== auth()->user()->id) {
-            abort(403);
-        }
-        Category::where('id', $category->id)->update($validatedData);
+
+        Category::where('slug', $category->slug)->update($validatedData);
         $notif = [
             'message' => 'Data has been Updated',
             'alert-type' => 'success'
@@ -136,7 +135,7 @@ class CreatorCategoryController extends Controller
     public function checkSlug(Request $request)
     {
 
-        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->name);
 
         return response()->json(['slug' => $slug]);
     }

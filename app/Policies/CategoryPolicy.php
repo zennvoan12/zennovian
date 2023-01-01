@@ -12,11 +12,9 @@ class CategoryPolicy
 
     public function viewAny(User $user)
     {
-        if ($user->role === 'admin' || $user->role === 'creator') {
-            return true;
-        }
 
-        return false;
+
+        return in_array($user->role, ['admin', 'creator']);
     }
 
     /**

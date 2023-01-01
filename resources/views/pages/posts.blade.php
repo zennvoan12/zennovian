@@ -22,8 +22,8 @@
                                 class="text-decoration-none text-dark">{{ $posts[0]->title }}</a></h2>
                         <small class="text-muted">
                             <h6>By :@if ($posts[0]->author !== null)
-                                    <a
-                                        href="/posts?author={{ $posts[0]->author->username }}">{{ $posts[0]->author->name }}</a>
+                                    <a href="/posts?author={{ $posts[0]->author->username }}"
+                                        class="text-dark">{{ $posts[0]->author->name }}</a>
                                 @endif
                                 in
                                 <a class="text-decoration-none text-dark"
@@ -64,8 +64,8 @@
                                             <h4 class="post-title">{{ $post->title }}</h4>
 
                                             <h6>By : @if ($posts[0]->author !== null)
-                                                    <a
-                                                        href="/posts?author={{ $posts[0]->author->username }}">{{ $posts[0]->author->name }}</a>
+                                                    <a href="/posts?author={{ $posts[0]->author->username }}"
+                                                        class="text-dark text-decoration-none">{{ $posts[0]->author->name }}</a>
                                                 @endif
 
                                             </h6>

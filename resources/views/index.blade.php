@@ -228,7 +228,8 @@
 
                         <div class="d-lg-flex post-entry-2">
                             <a href="single-post.html" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
-                                <img src="assets/img/post-landscape-6.jpg" alt="" class="img-fluid">
+                                <img src="https://source.unsplash.com/520x300?{{ $post->first()->category->name }}"
+                                    alt="" class="img-fluid">
                             </a>
                             <div>
                                 <div class="post-meta"><span class="date">{{ $posts->first()->category->name }}</span>
@@ -247,103 +248,64 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+
+                                <div class="post-entry-1 border-bottom">
+                                    <a href="single-post.html"><img
+                                            src="https://source.unsplash.com/520x300?{{ $hacks[1]->category->name }}"
+                                            alt="" class="img-fluid"></a>
+                                    <div class="post-meta"><span class="date">{{ $hacks[1]->category->name }}</span>
+                                        <span class="mx-1">&bullet;</span>
+                                        <span>{{ $hacks[1]->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <h2 class="mb-2"><a href="single-post.html">{{ $hacks[1]->title }}</a></h2>
+                                    <span class="author mb-3 d-block">{{ $hacks[1]->author->name }}</span>
+                                    <p class="mb-4 d-block">{{ $hacks[1]->excerpt }}</p>
+                                </div>
+
+                                <div class="post-entry-1">
+                                    <div class="post-meta"><span class="date">{{ $hacks[2]->category->name }}</span>
+                                        <span class="mx-1">&bullet;</span>
+                                        <span>{{ $hacks[2]->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <h2 class="mb-2"><a href="single-post.html">{{ $hacks[2]->title }}</a>
+                                    </h2>
+                                    <span class="author mb-3 d-block">{{ $hacks[2]->author->name }}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="post-entry-1">
+                                    <a href="single-post.html"><img
+                                            src="https://source.unsplash.com/520x300?{{ $hacks[3]->category->name }}"
+                                            alt="" class="img-fluid"></a>
+                                    <div class="post-meta"><span class="date">{{ $hacks[3]->category->name }}</span>
+                                        <span class="mx-1">&bullet;</span>
+                                        <span>{{ $hacks[3]->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <h2 class="mb-2"><a href="single-post.html">{{ $hacks[3]->title }}</a></h2>
+                                    <span class="author mb-3 d-block">{{ $hacks[3]->author->name }}</span>
+                                    <p class="mb-4 d-block">{{ $hacks[3]->excerpt }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             @endif
-            <div class="row">
-                <div class="col-lg-4">
+            <div class="col-md-3">
+                @foreach ($hacks->skip(4)->take(6) as $hack)
                     <div class="post-entry-1 border-bottom">
-                        <a href="single-post.html"><img src="assets/img/post-landscape-1.jpg" alt=""
-                                class="img-fluid"></a>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                            <span>Jul 5th '22</span>
+                        <div class="post-meta"><span class="date">{{ $hack->category->name }}</span> <span
+                                class="mx-1">&bullet;</span>
+                            <span>{{ $hack->created_at->diffForHumans() }}</span>
                         </div>
-                        <h2 class="mb-2"><a href="single-post.html">11 Work From Home Part-Time Jobs You Can Do
-                                Now</a></h2>
-                        <span class="author mb-3 d-block">Jenny Wilson</span>
-                        <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero
-                            temporibus repudiandae, inventore pariatur numquam cumque possimus</p>
+                        <h2 class="mb-2"><a href="single-post.html">{{ $hack->title }}</a></h2>
+                        <span class="author mb-3 d-block">{{ $hack->author->name }}</span>
                     </div>
+                @endforeach
 
-                    <div class="post-entry-1">
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                            <span>Jul 5th '22</span>
-                        </div>
-                        <h2 class="mb-2"><a href="single-post.html">5 Great Startup Tips for Female Founders</a>
-                        </h2>
-                        <span class="author mb-3 d-block">Jenny Wilson</span>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="post-entry-1">
-                        <a href="single-post.html"><img src="assets/img/post-landscape-2.jpg" alt=""
-                                class="img-fluid"></a>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                            <span>Jul 5th '22</span>
-                        </div>
-                        <h2 class="mb-2"><a href="single-post.html">How to Avoid Distraction and Stay Focused
-                                During Video Calls?</a></h2>
-                        <span class="author mb-3 d-block">Jenny Wilson</span>
-                        <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero
-                            temporibus repudiandae, inventore pariatur numquam cumque possimus</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="post-entry-1 border-bottom">
-                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                    <span>Jul 5th '22</span>
-                </div>
-                <h2 class="mb-2"><a href="single-post.html">How to Avoid Distraction and Stay Focused During
-                        Video Calls?</a></h2>
-                <span class="author mb-3 d-block">Jenny Wilson</span>
             </div>
-
-            <div class="post-entry-1 border-bottom">
-                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                    <span>Jul 5th '22</span>
-                </div>
-                <h2 class="mb-2"><a href="single-post.html">17 Pictures of Medium Length Hair in Layers That
-                        Will Inspire Your New Haircut</a></h2>
-                <span class="author mb-3 d-block">Jenny Wilson</span>
-            </div>
-
-            <div class="post-entry-1 border-bottom">
-                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                    <span>Jul 5th '22</span>
-                </div>
-                <h2 class="mb-2"><a href="single-post.html">9 Half-up/half-down Hairstyles for Long and Medium
-                        Hair</a></h2>
-                <span class="author mb-3 d-block">Jenny Wilson</span>
-            </div>
-
-            <div class="post-entry-1 border-bottom">
-                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                    <span>Jul 5th '22</span>
-                </div>
-                <h2 class="mb-2"><a href="single-post.html">Life Insurance And Pregnancy: A Working Mom’s
-                        Guide</a></h2>
-                <span class="author mb-3 d-block">Jenny Wilson</span>
-            </div>
-
-            <div class="post-entry-1 border-bottom">
-                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                    <span>Jul 5th '22</span>
-                </div>
-                <h2 class="mb-2"><a href="single-post.html">The Best Homemade Masks for Face (keep the Pimples
-                        Away)</a></h2>
-                <span class="author mb-3 d-block">Jenny Wilson</span>
-            </div>
-
-            <div class="post-entry-1 border-bottom">
-                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span>
-                    <span>Jul 5th '22</span>
-                </div>
-                <h2 class="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should
-                        Know</a></h2>
-                <span class="author mb-3 d-block">Jenny Wilson</span>
-            </div>
-        </div>
         </div>
         </div>
     </section>

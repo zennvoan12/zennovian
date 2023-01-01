@@ -9,13 +9,14 @@ use App\Models\Post;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view('index', [
             "title" => "Home",
             "posts" => Post::latest()->get(),
-
-
+            "hacks" =>  Post::whereHas('category', function ($query) {
+                $query->where('name', 'Hacking');
+            })->get()
         ]);
     }
 }

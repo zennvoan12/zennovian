@@ -7,7 +7,7 @@
             <h1 class="post-title wow fadeInUp">
                 <h1>{{ $post->$title }}</h1>
                 <div class="row">
-                    <div class="col-md-8 blog-post-wrapper">
+                    <div class="col-lg-14 blog-post-wrapper">
                         <div class="post-header wow fadeInUp">
                             @if ($post->image)
                                 <div style="max-height: 350px; overflow: hidden;">

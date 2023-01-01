@@ -16,7 +16,10 @@ class HomeController extends Controller
             "posts" => Post::latest()->get(),
             "hacks" =>  Post::whereHas('category', function ($query) {
                 $query->where('name', 'Hacking');
-            })->get()
+            })->get(),
+            "webs" =>  Post::whereHas('category', function ($query) {
+                $query->where('name', 'Web Programming');
+            })->get(),
         ]);
     }
 }

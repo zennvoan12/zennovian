@@ -7410,7 +7410,7 @@ a.text-dark:hover, a.text-dark:focus {
     align-items: center;
     padding-top: 44px;
     padding-bottom: 44px; }
-    @media (max-width: 767px) {
+    @media (max-width:  200px) {
       .oleez-footer .footer-text {
         display: block; } }
     .oleez-footer .footer-text p {

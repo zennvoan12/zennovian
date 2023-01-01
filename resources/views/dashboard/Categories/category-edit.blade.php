@@ -75,7 +75,7 @@
                                             <i class="material-icons opacity-10">arrow_back</i>
                                             Back To Category</a>
                                         <form method="POST"
-                                            action="{{ route('category-edit', ['category' => $category]) }}"
+                                            action="{{ route('category-update', ['category' => $category]) }}"
                                             enctype="multipart/form-data">
                                             @method('put')
                                             @csrf
@@ -130,7 +130,7 @@
     <x-plugins></x-plugins>
 
     <script>
-        const title = document.querySelector("#title");
+        const title = document.querySelector("#name");
         const slug = document.querySelector("#slug");
 
         title.addEventListener("keyup", () => {

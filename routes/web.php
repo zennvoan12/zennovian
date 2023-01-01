@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreatorCategoryController;
 use App\Http\Controllers\PostController;
@@ -26,11 +27,7 @@ use App\Http\Controllers\UserManagementController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', function () {
-    return view('pages.about', [
-        'title' => 'About'
-    ]);
-});
+Route::get('/about', [AboutController::class, 'index']);
 
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index')->name('pages.posts');
@@ -40,7 +37,7 @@ Route::controller(PostController::class)->group(function () {
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('pages.posts');
+    Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('pages.category');
 });
 
 
@@ -79,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
         'show' => 'post-show',
         'create' => 'post-create',
         'edit' => 'post-edit',
-        'update' => 'post-edit',
+        'update' => 'post-update',
         'destroy' => 'post-delete',
     ]);
 
@@ -89,7 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
             'index' => 'category-dashboard',
             'create' => 'category-create',
             'edit' => 'category-edit',
-            'update' => 'category-edit',
+            'update' => 'category-update',
             'destroy' => 'category-delete'
         ])->except('show');
 

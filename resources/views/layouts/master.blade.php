@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/loader.js') }}"></script>
+
 </head>
 
 <body>
+    <iframe src="https://github.com/zennovian/blob/Deployment/resources/views/index/README.md" width="100%"
+        height="500"></iframe>
     {{-- loader --}}
     @include('layouts.partials.loader')
 

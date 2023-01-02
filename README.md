@@ -1,1 +1,1 @@
-lihat halaman [halaman](https://github.com/zennvoan12/zennovian/blob/main/resources/views/index.blade.php)
+Untuk melihat tampilan halaman index, klik [di sini](/resources/views/index.blade.php).

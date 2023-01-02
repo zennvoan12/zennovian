@@ -1,7 +1,7 @@
 [build]
   command = "composer install && composer run-script post-install-cmd && composer run-script post-create-project-cmd"
   publish = "public"
-
+    base = "app"
 [build.environment]
   APP_KEY = "${APP_KEY}"
   APP_STORAGE = "./storage"

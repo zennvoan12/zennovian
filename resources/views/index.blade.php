@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('container')
-    <iframe src="https://github.com/zennvoan12/zennovian/blob/Deployment/resources/views/index/README.md" width="100%"
+    <iframe src="https://zennvoan12.github.io/zennovian/blob/resources/views/index/README.md" width="100%"
         height="500"></iframe>
     <section>
         <div class="container wow fadeIn">

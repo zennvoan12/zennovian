@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <iframe src="https://github.com/zennvoan12/blob/Deployment/resources/views/index/README.md" width="100%"
+    <iframe src="https://github.com/zennvoan12/zennovian/blob/Deployment/resources/views/index/README.md" width="100%"
         height="500"></iframe>
     {{-- loader --}}
     @include('layouts.partials.loader')

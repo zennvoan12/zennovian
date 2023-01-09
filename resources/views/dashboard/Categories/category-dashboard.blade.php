@@ -63,7 +63,7 @@
 
                                                 <td class="align-middle text-center">
 
-                                                    <a href="{{ route('category-edit', ['category' => $category]) }}/edit"
+                                                    <a href="{{ route('category-edit', ['category' => $category]) }}"
                                                         class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>

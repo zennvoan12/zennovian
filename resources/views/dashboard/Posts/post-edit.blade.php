@@ -74,7 +74,7 @@
                                             class="btn btn-success">
                                             <i class="material-icons opacity-10">arrow_back</i>
                                             Back To My Post</a>
-                                        <form method="POST" action="{{ route('post-show', ['post' => $post]) }}"
+                                        <form method="POST" action="{{ route('post-update', ['post' => $post]) }}"
                                             enctype="multipart/form-data">
                                             @method('put')
                                             @csrf

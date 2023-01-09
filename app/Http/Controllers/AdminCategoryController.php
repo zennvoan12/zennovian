@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Cviebrock\EloquentSluggable\Services\SlugService;
-
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CreatorCategoryController extends Controller
+class AdminCategoryController extends Controller
 {
     public function __construct()
     {
@@ -121,9 +121,9 @@ class CreatorCategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, User $user)
     {
-        $category->delete();
+        $this->authorize('admin', $user)->category->delete();
         $notif = [
             'message' => 'Data has been Deleted',
             'alert-type' => 'success'

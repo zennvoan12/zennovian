@@ -469,7 +469,12 @@
             </div>
         </div>
         <x-footers.auth></x-footers.auth>
+<<<<<<< HEAD
     </main>
     <x-plugins></x-plugins>
+=======
+        </div>
+        <x-plugins></x-plugins>
+>>>>>>> origin/otorisasi
 
 </x-layout>

@@ -19,6 +19,7 @@
                     Hello, {{ auth()->user()->name }}
                 </h6>
             </li>
+<<<<<<< HEAD
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "
                     href="{{ route('user-profile') }}">
@@ -32,34 +33,52 @@
                 <li class="nav-item">
                     <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "
                         href="{{ route('user-management') }}">
+=======
+            @auth()
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "
+                        href="{{ route('user-profile') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1.2rem;" class="fas fa-user-circle ps-2 pe-2 text-center"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">User Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('user-dashboard') }}">
+>>>>>>> origin/otorisasi
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
                         </div>
                         <span class="nav-link-text ms-1">User Management</span>
                     </a>
                 </li>
+<<<<<<< HEAD
             @endcan
+=======
+>>>>>>> origin/otorisasi
 
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('dashboard') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('dashboard') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">dashboard</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-white  {{ $activePage == 'post-dashboard' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('post-dashboard') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">publish</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Post</span>
-                </a>
-            </li>
-            {{-- <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link text-white  {{ $activePage == 'post-dashboard' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('post-dashboard') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">publish</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Post</span>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'tables' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('tables') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -71,6 +90,7 @@
 
 
 
+<<<<<<< HEAD
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'virtual-reality' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('virtual-reality') }}">
@@ -95,16 +115,40 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Creator</h6>
                 </li>
+=======
+>>>>>>> origin/otorisasi
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ $activePage == 'category' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('category-dashboard') }}">
+                    <a class="nav-link text-white {{ $activePage == 'virtual-reality' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('virtual-reality') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">category</i>
+                            <i class="material-icons opacity-10">view_in_ar</i>
                         </div>
-                        <span class="nav-link-text ms-1">Post Category</span>
+                        <span class="nav-link-text ms-1">Virtual Reality</span>
                     </a>
                 </li>
-            @endcan
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'profile' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('profile') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li>
+            @endauth
+
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Creator</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'category' ? ' active bg-gradient-primary' : '' }}  "
+                    href="{{ route('category-dashboard') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">category</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Post Category</span>
+                </a>
+            </li>
 
 
 

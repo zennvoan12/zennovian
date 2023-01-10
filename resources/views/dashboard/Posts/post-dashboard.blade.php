@@ -81,6 +81,7 @@
                                                         class="badge bg-warning">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
+<<<<<<< HEAD
                                                     <form action="{{ route('post-delete', $post->slug) }}"
                                                         method="POST" class="d-inline" id="deleteForm">
                                                         @csrf
@@ -90,6 +91,18 @@
                                                             data-slug="{{ $post->slug }}"><i
                                                                 class="material-icons opacity-10">cancel</i></button>
                                                     </form>
+=======
+                                                    @can('admin',$user)
+                                                        <form action="{{ route('post-show', ['post' => $post->slug]) }}"
+                                                            method="POST" class="d-inline" id="deleteForm">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button type="button" class="badge bg-danger border-0"><i
+                                                                    class="material-icons opacity-10"
+                                                                    onclick=" confirmDelete()">cancel</i></button>
+                                                        </form>
+                                                    @endcan
+>>>>>>> origin/otorisasi
 
                                                 </td>
                                             </tr>
@@ -97,16 +110,24 @@
 
                                     </tbody>
                                 </table>
+<<<<<<< HEAD
                                 <div class=" d-lg-flex justify-content-center mt-5">
 
                                     {{ $posts->links() }}
                                 </div>
+=======
+                                <nav class=" d-lg-flex justify-content-center mt-5">
+
+                                    {{ $posts->links() }}
+                                </nav>
+>>>>>>> origin/otorisasi
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+
+            </div>
             <x-footers.auth></x-footers.auth>
         </div>
     </main>

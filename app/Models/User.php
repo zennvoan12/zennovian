@@ -26,8 +26,13 @@ class User extends Authenticatable
         'email',
         'password',
         'location',
+<<<<<<< HEAD
         'role',
         'photo',
+=======
+        'photo',
+        'role',
+>>>>>>> origin/otorisasi
         'phone',
         'about',
         'password_confirmation'

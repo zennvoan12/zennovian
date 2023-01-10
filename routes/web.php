@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreatorCategoryController;
 use App\Http\Controllers\PostController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardCreatorController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -79,27 +79,25 @@ Route::group(['middleware' => 'auth'], function () {
         'update' => 'post-update',
         'destroy' => 'post-delete',
     ]);
-
-    Route::resource('/dashboard/categories', CreatorCategoryController::class)
-        ->middleware('admin:viewAny,CategoryPolicy')
+    Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')
+        ->middleware('admin:admin')
         ->names([
             'index' => 'category-dashboard',
             'create' => 'category-create',
             'edit' => 'category-edit',
-            'update' => 'category-update',
+            'update' => 'category-edit',
             'destroy' => 'category-delete'
         ])->except('show');
 
-    Route::resource('/dashboard/users', UserManagementController::class)
-        ->middleware('creator:creator')->names([
-            'index' => 'user-management',
-            'create' => 'user-management-create',
-            'store' => 'user-management-store',
-            'show' => 'user-management-show',
-            'edit' => 'user-management-edit',
-            'update' => 'user-management-update',
-            'destroy' => 'user-management-delete'
-        ]);
+
+    // Route::controller(DashboardPostController::class)->group(function () {
+    //     Route::get('dashboard/posts', [DashboardPostController::class, 'index'])->name('post-dashboard');
+    //     Route::get('dashboard/posts/{post:slug}', [DashboardPostController::class, 'show'])->name('post-show');
+    //     Route::post('dashboard/posts/create', [DashboardPostController::class, 'index'])->name('post-create');
+    //     Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+    //     // Route::delete('dashboard/posts/{post:id}', [DashboardPostController::class, 'destroy'])->name('post-dashboard')->where('slug', '[\w-]+');
+    //     Route::delete('dashboard/posts/{post:slug}', [DashboardPostController::class, 'destroy'])->name('post-delete')->where('slug', '[\w-]+');
+    // });
 
     Route::get('virtual-reality', function () {
         return view('dashboard.virtual-reality');
@@ -117,7 +115,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard.static-sign-up');
     })->name('static-sign-up');
 
-
+    Route::get('user-management', function () {
+        return view('dashboard.laravel-examples.user-management');
+    })->name('user-management');
 
     Route::get('user-profile', function () {
         return view('dashboard.laravel-examples.user-profile');

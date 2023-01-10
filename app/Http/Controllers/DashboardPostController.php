@@ -15,9 +15,21 @@ class DashboardPostController extends Controller
 
 
     public function index(Post $posts)
+=======
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Post $posts, User $user)
+>>>>>>> origin/otorisasi
     {
         return view('dashboard.Posts.post-dashboard', [
             'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString()
+=======
+            'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString(),
+
+>>>>>>> origin/otorisasi
         ]);
     }
 
@@ -215,3 +227,4 @@ class DashboardPostController extends Controller
         return response()->json(['slug' => $slug]);
     }
 }
+    }

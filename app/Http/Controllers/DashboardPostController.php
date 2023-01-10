@@ -8,24 +8,19 @@ use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class DashboardPostController extends Controller
 {
 
 
 
-    public function index(Post $posts){
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Post $posts, User $user)
     {
         $this->authorize('admin', $user);
         $pagination = Post::paginate(10);
         return view('dashboard.Posts.post-dashboard', [
-            'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString()
+
             'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString(),
 
         ]);
@@ -203,11 +198,7 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post, User $user)
     {
-<<<<<<< HEAD
-        $post = Post::where('id', $post->id)->firstOrFail();
-=======
         $this->authorize('admin', $user);
->>>>>>> origin/otorisasi
         if ($post->image) {
             Storage::delete($post->image);
         }
@@ -229,4 +220,3 @@ class DashboardPostController extends Controller
         return response()->json(['slug' => $slug]);
     }
 }
-    }

@@ -18,9 +18,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->string('email')->unique();
+<<<<<<< HEAD
             $table->string('photo')->nullable();    
+=======
+>>>>>>> origin/otorisasi
             $table->string('phone')->nullable();
             $table->string('location')->nullable();
+            $table->string('photo',)->nullable();
+            $table->string('roles')->default('user');
             $table->text('about')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();

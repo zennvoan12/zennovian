@@ -11,13 +11,29 @@ use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
+<<<<<<< HEAD
 
 
 
     public function index(Post $posts)
+=======
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Post $posts, User $user)
+>>>>>>> origin/otorisasi
     {
+        $this->authorize('admin', $user);
+        $pagination = Post::paginate(10);
         return view('dashboard.Posts.post-dashboard', [
+<<<<<<< HEAD
             'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString()
+=======
+            'posts' => Post::where('user_id', auth()->user()->id)->paginate(10)->withQueryString(),
+
+>>>>>>> origin/otorisasi
         ]);
     }
 
@@ -191,9 +207,13 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post, User $user)
     {
+<<<<<<< HEAD
         $post = Post::where('id', $post->id)->firstOrFail();
+=======
+        $this->authorize('admin', $user);
+>>>>>>> origin/otorisasi
         if ($post->image) {
             Storage::delete($post->image);
         }

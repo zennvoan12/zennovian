@@ -4,10 +4,10 @@
     </button>
     <ul class="oleez-social-menu">
         <li>
-            <a href="#!" class="oleez-social-menu-link">Facebook</a>
+            <a href="https://www.facebook.com/zennovian666/" target="_blank" class="oleez-social-menu-link">Facebook</a>
         </li>
         <li>
-            <a href="#!" class="oleez-social-menu-link">Instagram</a>
+            <a href="https://www.instagram.com/vianzzzzz/" target="_blank" class="oleez-social-menu-link">Instagram</a>
         </li>
         <li>
             <a href="#!" class="oleez-social-menu-link">Behance</a>

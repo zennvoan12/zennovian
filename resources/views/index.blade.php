@@ -8,8 +8,16 @@
 
                     @if ($posts->count())
                         <div class="carousel-item active">
-                            <img src="https://source.unsplash.com/1800x800?{{ $posts[0]->category->name }}" alt="First slide"
-                                class="w-100">
+                            @if ($posts[0]->image)
+                                <div style="max-height: 350px; overflow: hidden;">
+
+                                    <img src="{{ asset('storage/' . $posts[0]->image) }}"
+                                        alt="{{ $posts[0]->category->name }}" class="post-featured-image img-fluid mb-4">
+                                </div>
+                            @else
+                                <img src="https://source.unsplash.com/1800x800?{{ $posts[0]->category->name }}"
+                                    alt="{{ $posts[0]->category->name }}" class="post-featured-image img-fluid mb-4">
+                            @endif
                             <div class="carousel-caption">
                                 <h2 data-animation="animated fadeInRight"><span>
                                         <p style="font-size: 20px">{{ $posts[0]->title }} </p>
@@ -22,8 +30,16 @@
                             </div>
                         </div>
                         <div class="carousel-item ">
-                            <img src="https://source.unsplash.com/1800x800??{{ $posts[1]->category->name }}"
-                                alt="First slide" class="w-100">
+                            @if ($posts[1]->image)
+                                <div style="max-height: 350px; overflow: hidden;">
+
+                                    <img src="{{ asset('storage/' . $posts[1]->image) }}"
+                                        alt="{{ $posts[1]->category->name }}" class="post-featured-image img-fluid mb-4">
+                                </div>
+                            @else
+                                <img src="https://source.unsplash.com/1800x800?{{ $posts[1]->category->name }}"
+                                    alt="{{ $posts[0]->category->name }}" class="post-featured-image img-fluid mb-4">
+                            @endif
                             <div class="carousel-caption">
                                 <h2 data-animation="animated fadeInRight"><span>
                                         <p style="font-size: 20px">{{ $posts[1]->title }} </p>
@@ -38,8 +54,16 @@
 
                 </div>
                 <div class="carousel-item ">
-                    <img src="https://source.unsplash.com/1800x800?{{ $posts[2]->category->name }}" alt="First slide"
-                        class="w-100">
+                    @if ($posts[2]->image)
+                        <div style="max-height: 350px; overflow: hidden;">
+
+                            <img src="{{ asset('storage/' . $posts[2]->image) }}" alt="{{ $posts[2]->category->name }}"
+                                class="post-featured-image img-fluid mb-4">
+                        </div>
+                    @else
+                        <img src="https://source.unsplash.com/1800x800?{{ $posts[2]->category->name }}"
+                            alt="{{ $posts[2]->category->name }}" class="post-featured-image img-fluid mb-4">
+                    @endif
                     <div class="carousel-caption">
                         <h2 data-animation="animated fadeInRight"><span>
                                 <p style="font-size: 20px">{{ $posts[2]->title }} </p>
@@ -53,18 +77,26 @@
 
             </div>
             <div class="carousel-item ">
-                <img src="https://source.unsplash.com/1200x600?{{ $posts[3]->category->name }}" alt="First slide"
-                    class="w-100">
-                <div class="carousel-caption">
-                    <h2 data-animation="animated fadeInRight"><span>
-                            <p style="font-size: 20px">{{ $posts[3]->title }} </p>
-                        </span></h2>
+                < @if ($posts[3]->image)
+                    <div style="max-height: 350px; overflow: hidden;">
+
+                        <img src="{{ asset('storage/' . $posts[3]->image) }}" alt="{{ $posts[3]->category->name }}"
+                            class="post-featured-image img-fluid mb-4">
+                    </div>
+                @else
+                    <img src="https://source.unsplash.com/1800x800?{{ $posts[3]->category->name }}"
+                        alt="{{ $posts[3]->category->name }}" class="post-featured-image img-fluid mb-4">
+                    @endif
+                    <div class="carousel-caption">
+                        <h2 data-animation="animated fadeInRight"><span>
+                                <p style="font-size: 20px">{{ $posts[3]->title }} </p>
+                            </span></h2>
 
 
-                    <a href="/posts/{{ $posts[3]->slug }}" class="carousel-item-link"
-                        data-animation="animated fadeInRight">EXPLORE</a>
+                        <a href="/posts/{{ $posts[3]->slug }}" class="carousel-item-link"
+                            data-animation="animated fadeInRight">EXPLORE</a>
 
-                </div>
+                    </div>
             </div>
             @endif
 
@@ -73,48 +105,7 @@
         </div>
     </section>
 
-    {{-- <section class="oleez-landing-section oleez-landing-section-projects">
-        <div class="container">
-            <div class="oleez-landing-section-content">
-                <div class="oleez-landing-section-verticals wow fadeIn">
-                    <span class="number">02</span> <img src="assets/images/Logo_2.svg" alt="oleez" height="12px">
-                </div>
-                <h2 class="section-title wow fadeInUp">Latest Projects <a href="#!" class="all-projects-link">View
-                        All</a></h2>
-                <div class="landing-projects-carousel wow fadeIn">
-                    <div class="card landing-project-card">
-                        <img src="assets/images/Project_1@2x.jpg" class="card-img" alt="Project 1">
-                        <div class="card-img-overlay">
-                            <h6 class="project-category">Branding</h6>
-                            <h5 class="project-title">BootstrapDash</h5>
-                        </div>
-                    </div>
-                    <div class="card landing-project-card">
-                        <img src="assets/images/Project_2@2x.jpg" class="card-img" alt="Project 1">
-                        <div class="card-img-overlay">
-                            <h6 class="project-category">Branding</h6>
-                            <h5 class="project-title">BootstrapDash</h5>
-                        </div>
-                    </div>
-                    <div class="card landing-project-card">
-                        <img src="assets/images/Project_3@2x.jpg" class="card-img" alt="Project 1">
-                        <div class="card-img-overlay">
-                            <h6 class="project-category">Branding</h6>
-                            <h5 class="project-title">BootstrapDash</h5>
-                        </div>
-                    </div>
-                    <div class="card landing-project-card">
-                        <img src="assets/images/Project_4@2x.jpg" class="card-img" alt="Project 1">
-                        <div class="card-img-overlay">
-                            <h6 class="project-category">Branding</h6>
-                            <h5 class="project-title">BootstrapDash</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-navbtn-wrapper"></div>
-            </div>
-        </div>
-    </section> --}}
+
     <section id="posts" class="posts  border-1 mt-5">
         <div class="container" data-aos="fade-up">
             <div class="row g-5">
@@ -122,9 +113,20 @@
                     @if ($posts->count())
                         <div class="post-entry-1 lg">
 
-                            <a href="/posts/{{ $posts[4]->slug }}"><img
-                                    src="https://source.unsplash.com/800x600?{{ $posts[4]->category->name }}"
-                                    alt="" class="img-fluid"></a>
+                            <a href="/posts/{{ $posts[4]->slug }}">
+                                @if ($posts[4]->image)
+                                    <div style="max-height: 350px; overflow: hidden;">
+
+                                        <img src="{{ asset('storage/' . $posts[4]->image) }}"
+                                            alt="{{ $posts[4]->category->name }}"
+                                            class="post-featured-image img-fluid mb-4">
+                                    </div>
+                                @else
+                                    <img src="https://source.unsplash.com/1800x800?{{ $posts[4]->category->name }}"
+                                        alt="{{ $posts[4]->category->name }}" class="post-featured-image img-fluid mb-4">
+                                @endif
+
+                            </a>
                             <div class="post-meta"><span class="date">{{ $posts[4]->category->name }}</span> <span
                                     class="mx-1">&bullet;</span>
                                 <span>{{ $posts[4]->created_at->diffForHumans() }}</span>
@@ -217,7 +219,7 @@
 
             @if ($posts->count())
                 <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                    <h2>{{ $posts->first()->category->name }}</h2>
+                    <h2>{{ $hacks->first()->category->name }}</h2>
                     <div><a href="/posts?category={{ $posts[0]->category->slug }}" class="more link-dark">
                             <p class="text-dark">See All</p>
                         </a></div>
@@ -317,7 +319,7 @@
         <div class="container" data-aos="fade-up">
             @if ($posts->count())
                 <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                    <h2>{{ $posts[1]->category->name }}</h2>
+                    <h2>{{ $webs[0]->first()->category->name }}</h2>
                     <div><a href="category.html" class="more text-dark">See All</a></div>
                 </div>
 

@@ -319,7 +319,7 @@
         <div class="container" data-aos="fade-up">
             @if ($posts->count())
                 <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                    <h2>{{ $webs[0]->first()->category->name }}</h2>
+                    <h2>{{ $webs->first()->category->name }}</h2>
                     <div><a href="category.html" class="more text-dark">See All</a></div>
                 </div>
 
